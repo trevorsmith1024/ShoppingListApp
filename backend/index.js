@@ -23,7 +23,7 @@ const fakeDatabase = {
   }
 };
 
-var { nodeInterface, nodeField } = nodeDefinitions(
+const { nodeInterface, nodeField } = nodeDefinitions(
   (globalId) => {
     const { type, id } = fromGlobalId(globalId);
     return fakeDatabase[type][id];
