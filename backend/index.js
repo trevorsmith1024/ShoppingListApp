@@ -21,26 +21,10 @@ const viewerType = new GraphQLObjectType({
   }
 })
 
-const userType = new GraphQLObjectType({
-  name: 'User',
-  fields: {
-    id: globalIdField(),
-    name: { type: GraphQLString },
-  },
-  interfaces: [nodeInterface]
-});
-
 const queryType = new GraphQLObjectType({
   name: 'Query',
   fields: {
     node: nodeField,
-    user: {
-      type: userType,
-      args: {
-        id: { type: GraphQLString }
-      },
-      resolve: utils.typedDbResolver('User')
-    },
     viewer: {
       type: viewerType,
       resolve: () => ({})

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<219f334a51da47a944e28b8e880c2818>>
+ * @generated SignedSource<<daafe06525c88d90135b600f0529f8da>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -12,15 +12,9 @@
 /*::
 import type { ConcreteRequest, Query } from 'relay-runtime';
 type ShoppingList_list$fragmentType = any;
-type UserComponent_user$fragmentType = any;
 export type AppQuery$variables = {||};
 export type AppQueryVariables = AppQuery$variables;
 export type AppQuery$data = {|
-  +user: ?{|
-    +id: string,
-    +name: ?string,
-    +$fragmentSpreads: UserComponent_user$fragmentType,
-  |},
   +viewer: ?{|
     +$fragmentSpreads: ShoppingList_list$fragmentType,
   |},
@@ -32,53 +26,13 @@ export type AppQuery = {|
 |};
 */
 
-var node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "Literal",
-    "name": "id",
-    "value": "VXNlcjph"
-  }
-],
-v1 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-},
-v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "name",
-  "storageKey": null
-};
-return {
+var node/*: ConcreteRequest*/ = {
   "fragment": {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
     "name": "AppQuery",
     "selections": [
-      {
-        "alias": null,
-        "args": (v0/*: any*/),
-        "concreteType": "User",
-        "kind": "LinkedField",
-        "name": "user",
-        "plural": false,
-        "selections": [
-          (v1/*: any*/),
-          (v2/*: any*/),
-          {
-            "args": null,
-            "kind": "FragmentSpread",
-            "name": "UserComponent_user"
-          }
-        ],
-        "storageKey": "user(id:\"VXNlcjph\")"
-      },
       {
         "alias": null,
         "args": null,
@@ -107,19 +61,6 @@ return {
     "selections": [
       {
         "alias": null,
-        "args": (v0/*: any*/),
-        "concreteType": "User",
-        "kind": "LinkedField",
-        "name": "user",
-        "plural": false,
-        "selections": [
-          (v1/*: any*/),
-          (v2/*: any*/)
-        ],
-        "storageKey": "user(id:\"VXNlcjph\")"
-      },
-      {
-        "alias": null,
         "args": null,
         "concreteType": "Viewer",
         "kind": "LinkedField",
@@ -134,8 +75,20 @@ return {
             "name": "shoppingList",
             "plural": true,
             "selections": [
-              (v1/*: any*/),
-              (v2/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "id",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "name",
+                "storageKey": null
+              },
               {
                 "alias": null,
                 "args": null,
@@ -159,17 +112,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "aa8454eaf496e3f5f42ab3b02562d345",
+    "cacheID": "d94d3ad580f93330ca3c07394347a9db",
     "id": null,
     "metadata": {},
     "name": "AppQuery",
     "operationKind": "query",
-    "text": "query AppQuery {\n  user(id: \"VXNlcjph\") {\n    id\n    name\n    ...UserComponent_user\n  }\n  viewer {\n    ...ShoppingList_list\n  }\n}\n\nfragment ShoppingListItemEditor_item on ShoppingListItem {\n  name\n  description\n  count\n}\n\nfragment ShoppingListItem_item on ShoppingListItem {\n  name\n  description\n  count\n  ...ShoppingListItemEditor_item\n}\n\nfragment ShoppingList_list on Viewer {\n  shoppingList {\n    id\n    ...ShoppingListItem_item\n  }\n}\n\nfragment UserComponent_user on User {\n  name\n}\n"
+    "text": "query AppQuery {\n  viewer {\n    ...ShoppingList_list\n  }\n}\n\nfragment ShoppingListItemEditor_item on ShoppingListItem {\n  name\n  description\n  count\n}\n\nfragment ShoppingListItem_item on ShoppingListItem {\n  name\n  description\n  count\n  ...ShoppingListItemEditor_item\n}\n\nfragment ShoppingList_list on Viewer {\n  shoppingList {\n    id\n    ...ShoppingListItem_item\n  }\n}\n"
   }
 };
-})();
 
-(node/*: any*/).hash = "566586f1a41c8f9b6bc66f04a864d8e0";
+(node/*: any*/).hash = "406a069cc05dc41ce8575ee5e4dc578a";
 
 module.exports = ((node/*: any*/)/*: Query<
   AppQuery$variables,

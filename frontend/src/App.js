@@ -9,7 +9,6 @@ import {
 } from 'react-relay/hooks';
 import RelayEnvironment from './RelayEnvironment';
 
-import UserComponent from './User';
 import ShoppingList from './ShoppingList';
 
 const { Suspense } = React;
@@ -17,11 +16,6 @@ const { Suspense } = React;
 // Define a query
 const AppQuery = graphql`
   query AppQuery {
-    user(id: "VXNlcjph") {
-      id
-      name
-      ...UserComponent_user
-    }
     viewer {
       ...ShoppingList_list
     }
@@ -40,8 +34,6 @@ function App(props) {
   return (
     <div className="App">
       <header className="App-header">
-        <p>{data.user.name}</p>
-        <UserComponent user={data.user}/>
         <ShoppingList viewer={data.viewer}/>
       </header>
     </div>
