@@ -11,7 +11,7 @@ const {
   GraphQLSchema } = require('graphql');
 const { fromGlobalId, globalIdField, nodeInterface, nodeField } = require('./src/nodeUtils');
 
-const { shoppingListItemType, mutations: shoppingListMutations } = require('./src/shoppingListItem');
+const { shoppingListItemTypeName, shoppingListItemType, mutations: shoppingListMutations } = require('./src/shoppingListItem');
 const { getList } = require('./src/fakeDatabase');
 
 const viewerType = new GraphQLObjectType({
@@ -19,7 +19,7 @@ const viewerType = new GraphQLObjectType({
   fields: {
     shoppingList: {
       type: new GraphQLNonNull(new GraphQLList(new GraphQLNonNull(shoppingListItemType))),
-      resolve: (ctx, args) => getList('ShoppingListItem')
+      resolve: (ctx, args) => getList(shoppingListItemTypeName)
     },
   }
 })
@@ -35,7 +35,6 @@ const queryType = new GraphQLObjectType({
   }
 });
 
-
 const mutationType = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
@@ -43,7 +42,7 @@ const mutationType = new GraphQLObjectType({
   }
 })
 
-const schema = new GraphQLSchema({query: queryType});
+const schema = new GraphQLSchema({query: queryType, mutation: mutationType});
 
 const app = express();
 app.use(cors());

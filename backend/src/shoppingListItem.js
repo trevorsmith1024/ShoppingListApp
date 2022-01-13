@@ -5,8 +5,14 @@ const {
   GraphQLList,
   GraphQLString,
   GraphQLInt,
-  GraphQLSchema } = require('graphql');
+  GraphQLSchema,
+  GraphQLID, } = require('graphql');
+
 const { fromGlobalId, globalIdField, nodeInterface, nodeField } = require('./nodeUtils');
+
+const { editItem } = require('./fakeDatabase');
+
+const shoppingListItemTypeName = 'ShoppingListItem';
 
 const shoppingListItemFields = {
   id: globalIdField(),
@@ -15,31 +21,31 @@ const shoppingListItemFields = {
   count: { type: new GraphQLNonNull(GraphQLInt) },
 }
 
-const { id: _, newShoppingListItemFields } = shoppingListItemFields;
-
 const shoppingListItemType = new GraphQLObjectType({
-  name: 'ShoppingListItem',
+  name: shoppingListItemTypeName,
   fields: shoppingListItemFields,
   interfaces: [nodeInterface]
 });
 
 const editShoppingListItemInput = new GraphQLInputObjectType({
   name: 'EditShoppingListItemInput',
-  fields: shoppingListItemFields
+  fields: { ...shoppingListItemFields, id: { type: new GraphQLNonNull(GraphQLID) }}
 })
 
 const mutations = {
   editShoppingListItem: {
-    type: 'ShoppingListItem',
+    type: shoppingListItemType,
     args: {
       input: { type: editShoppingListItemInput }
     },
-    resolve: (ctx, { input }) => {
+    resolve: (ctx, { input: { id, ...values } }) => {
+      return editItem(shoppingListItemTypeName, fromGlobalId(id).id, values);
     }
   }
 }
 
 module.exports = {
+  shoppingListItemTypeName,
   shoppingListItemType,
   editShoppingListItemInput,
   mutations
