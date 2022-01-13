@@ -14,7 +14,8 @@ const shoppingListItemType = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     count: { type: GraphQLInt },
-  }
+  },
+  interfaces: [nodeInterface]
 });
 
 const editShoppingListItemInput = new GraphQLInputObjectType({
