@@ -34,7 +34,7 @@ const editShoppingListItemInput = new GraphQLInputObjectType({
 
 const mutations = {
   editShoppingListItem: {
-    type: shoppingListItemType,
+    type: new GraphQLNonNull(shoppingListItemType),
     args: {
       input: { type: editShoppingListItemInput }
     },

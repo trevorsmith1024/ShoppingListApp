@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8346a0e2d21bf56c23c48650ccb7df0b>>
+ * @generated SignedSource<<ce70fac5ad2971a494f969fb3b474b0d>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -15,9 +15,10 @@ import type { FragmentType } from "relay-runtime";
 declare export opaque type ShoppingListItemEditor_item$fragmentType: FragmentType;
 export type ShoppingListItemEditor_item$ref = ShoppingListItemEditor_item$fragmentType;
 export type ShoppingListItemEditor_item$data = {|
-  +name: ?string,
-  +description: ?string,
-  +count: ?number,
+  +id: string,
+  +name: string,
+  +description: string,
+  +count: number,
   +$fragmentType: ShoppingListItemEditor_item$fragmentType,
 |};
 export type ShoppingListItemEditor_item = ShoppingListItemEditor_item$data;
@@ -34,6 +35,13 @@ var node/*: ReaderFragment*/ = {
   "metadata": null,
   "name": "ShoppingListItemEditor_item",
   "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
+    },
     {
       "alias": null,
       "args": null,
@@ -60,7 +68,7 @@ var node/*: ReaderFragment*/ = {
   "abstractKey": null
 };
 
-(node/*: any*/).hash = "06c6be0b836320e21e421d94220f3f46";
+(node/*: any*/).hash = "0051ca6deeb066494c2384a8294fdd52";
 
 module.exports = ((node/*: any*/)/*: Fragment<
   ShoppingListItemEditor_item$fragmentType,

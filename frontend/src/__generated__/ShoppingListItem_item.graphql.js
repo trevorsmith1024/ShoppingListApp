@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<7eedeb9e6c323632faffc29a6fd813b8>>
+ * @generated SignedSource<<0952c8cc1828eb69c8c7a3fb4899712b>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -16,9 +16,9 @@ import type { FragmentType } from "relay-runtime";
 declare export opaque type ShoppingListItem_item$fragmentType: FragmentType;
 export type ShoppingListItem_item$ref = ShoppingListItem_item$fragmentType;
 export type ShoppingListItem_item$data = {|
-  +name: ?string,
-  +description: ?string,
-  +count: ?number,
+  +name: string,
+  +description: string,
+  +count: number,
   +$fragmentSpreads: ShoppingListItemEditor_item$fragmentType,
   +$fragmentType: ShoppingListItem_item$fragmentType,
 |};

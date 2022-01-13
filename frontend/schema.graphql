@@ -4,6 +4,17 @@ directive @specifiedBy(
   url: String!
 ) on SCALAR
 
+input EditShoppingListItemInput {
+  id: ID!
+  name: String!
+  description: String!
+  count: Int!
+}
+
+type Mutation {
+  editShoppingListItem(input: EditShoppingListItemInput): ShoppingListItem!
+}
+
 """An object with an ID"""
 interface Node {
   """The id of the object."""
@@ -22,12 +33,12 @@ type Query {
 type ShoppingListItem implements Node {
   """The ID of an object"""
   id: ID!
-  name: String
-  description: String
-  count: Int
+  name: String!
+  description: String!
+  count: Int!
 }
 
 type Viewer {
-  shoppingList: [ShoppingListItem]
+  shoppingList: [ShoppingListItem!]!
 }
 

@@ -7,6 +7,7 @@ export default function ShoppingListItemEditor(props) {
   const data = useFragment(
     graphql`
       fragment ShoppingListItemEditor_item on ShoppingListItem {
+        id
         name
         description
         count
@@ -15,7 +16,35 @@ export default function ShoppingListItemEditor(props) {
     props.item
   );
 
+  const [commit, isInFlight] = useMutation(graphql`
+    mutation ShoppingListItemEditorMutation($input: EditShoppingListItemInput!) {
+      editShoppingListItem(input: $input) {
+        name
+        description
+        count
+      }
+    }
+  `)
+
+  if (isInFlight) {
+    return <div>loading</div>
+  }
+
   return <div>
     {JSON.stringify(data, null, 2)}
+    <button
+      onClick={() => {
+        commit({
+          variables: {
+            input: {
+              ...data,
+              count: data.count * 2
+            }
+          }
+        })
+      }}
+    >
+      Double
+    </button>
   </div>
 }

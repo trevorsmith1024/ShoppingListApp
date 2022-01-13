@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<68e53c092e91bc05b0a3806b0c77a976>>
+ * @generated SignedSource<<3a10228ee3639f9ea3f98b932c4587e6>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -16,7 +16,7 @@ import type { FragmentType } from "relay-runtime";
 declare export opaque type ShoppingList_list$fragmentType: FragmentType;
 export type ShoppingList_list$ref = ShoppingList_list$fragmentType;
 export type ShoppingList_list$data = {|
-  +shoppingList: ?$ReadOnlyArray<?{|
+  +shoppingList: $ReadOnlyArray<{|
     +id: string,
     +$fragmentSpreads: ShoppingListItem_item$fragmentType,
   |}>,

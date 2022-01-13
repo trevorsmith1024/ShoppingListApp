@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<daafe06525c88d90135b600f0529f8da>>
+ * @generated SignedSource<<9a92911d0470f51cada9854b2518ee1b>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -112,12 +112,12 @@ var node/*: ConcreteRequest*/ = {
     ]
   },
   "params": {
-    "cacheID": "d94d3ad580f93330ca3c07394347a9db",
+    "cacheID": "6cd716798ab453c9ae822940e1d6c551",
     "id": null,
     "metadata": {},
     "name": "AppQuery",
     "operationKind": "query",
-    "text": "query AppQuery {\n  viewer {\n    ...ShoppingList_list\n  }\n}\n\nfragment ShoppingListItemEditor_item on ShoppingListItem {\n  name\n  description\n  count\n}\n\nfragment ShoppingListItem_item on ShoppingListItem {\n  name\n  description\n  count\n  ...ShoppingListItemEditor_item\n}\n\nfragment ShoppingList_list on Viewer {\n  shoppingList {\n    id\n    ...ShoppingListItem_item\n  }\n}\n"
+    "text": "query AppQuery {\n  viewer {\n    ...ShoppingList_list\n  }\n}\n\nfragment ShoppingListItemEditor_item on ShoppingListItem {\n  id\n  name\n  description\n  count\n}\n\nfragment ShoppingListItem_item on ShoppingListItem {\n  name\n  description\n  count\n  ...ShoppingListItemEditor_item\n}\n\nfragment ShoppingList_list on Viewer {\n  shoppingList {\n    id\n    ...ShoppingListItem_item\n  }\n}\n"
   }
 };
 
