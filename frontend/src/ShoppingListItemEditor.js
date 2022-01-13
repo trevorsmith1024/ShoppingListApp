@@ -1,7 +1,9 @@
 import graphql from 'babel-plugin-relay/macro';
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import {useFragment, useMutation} from 'react-relay';
+
+import ShoppingListItemForm from './ShoppingListItemForm';
 
 export default function ShoppingListItemEditor(props) {
   const data = useFragment(
@@ -26,12 +28,27 @@ export default function ShoppingListItemEditor(props) {
     }
   `)
 
+  const handleSubmit = useCallback(formData => {
+    commit({
+      variables: {
+        input: {
+          ...formData
+        }
+      }
+    })
+  })
+
+
+
   if (isInFlight) {
     return <div>loading</div>
   }
 
   return <div>
-    {JSON.stringify(data, null, 2)}
+    <pre style={{textAlign: 'left'}}>
+      {JSON.stringify(data, null, 2)}
+    </pre>
+    <ShoppingListItemForm initialData={data} onSubmit={handleSubmit}/>
     <button
       onClick={() => {
         commit({
