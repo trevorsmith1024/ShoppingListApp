@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2af440e849f4fdb7b20aa5ca1fba5358>>
+ * @generated SignedSource<<68e53c092e91bc05b0a3806b0c77a976>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -11,14 +11,14 @@
 
 /*::
 import type { Fragment, ReaderFragment } from 'relay-runtime';
+type ShoppingListItem_item$fragmentType = any;
 import type { FragmentType } from "relay-runtime";
 declare export opaque type ShoppingList_list$fragmentType: FragmentType;
 export type ShoppingList_list$ref = ShoppingList_list$fragmentType;
 export type ShoppingList_list$data = {|
   +shoppingList: ?$ReadOnlyArray<?{|
-    +name: ?string,
-    +description: ?string,
-    +count: ?number,
+    +id: string,
+    +$fragmentSpreads: ShoppingListItem_item$fragmentType,
   |}>,
   +$fragmentType: ShoppingList_list$fragmentType,
 |};
@@ -48,22 +48,13 @@ var node/*: ReaderFragment*/ = {
           "alias": null,
           "args": null,
           "kind": "ScalarField",
-          "name": "name",
+          "name": "id",
           "storageKey": null
         },
         {
-          "alias": null,
           "args": null,
-          "kind": "ScalarField",
-          "name": "description",
-          "storageKey": null
-        },
-        {
-          "alias": null,
-          "args": null,
-          "kind": "ScalarField",
-          "name": "count",
-          "storageKey": null
+          "kind": "FragmentSpread",
+          "name": "ShoppingListItem_item"
         }
       ],
       "storageKey": null
@@ -73,7 +64,7 @@ var node/*: ReaderFragment*/ = {
   "abstractKey": null
 };
 
-(node/*: any*/).hash = "a3f82e1bf6a6708ce1a34991a044389d";
+(node/*: any*/).hash = "ef37aadaf0c05be958d77aa35e3f3c3b";
 
 module.exports = ((node/*: any*/)/*: Fragment<
   ShoppingList_list$fragmentType,

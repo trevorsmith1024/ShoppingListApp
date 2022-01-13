@@ -5,6 +5,8 @@ import type {ShoppingList_list$key} from 'ShoppingList_list.graphql';
 import React from 'react';
 import {useFragment} from 'react-relay';
 
+import ShoppingListItem from './ShoppingListItem';
+
 type Props = {
   viewer: ShoppingList_list$key,
 };
@@ -14,9 +16,8 @@ function ShoppingList(props: Props) {
     graphql`
       fragment ShoppingList_list on Viewer {
         shoppingList {
-          name
-          description
-          count
+          id
+          ...ShoppingListItem_item
         }
       }
     `,
@@ -25,7 +26,12 @@ function ShoppingList(props: Props) {
 
   return (
     <>
-      <h1>ShoppingList: {JSON.stringify(data, null, 2)}</h1>
+      <h1>ShoppingList</h1>
+      {
+        data.shoppingList.map(item =>
+          <ShoppingListItem key={item.id} item={item}/>
+        )
+      }
     </>
   );
 }

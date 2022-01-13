@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<03a79fd949a5a95b00d39ab20167f8ad>>
+ * @generated SignedSource<<4f57760bae0355b9c7b5f0a2e9cf5b40>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -134,6 +134,7 @@ return {
             "name": "shoppingList",
             "plural": true,
             "selections": [
+              (v1/*: any*/),
               (v2/*: any*/),
               {
                 "alias": null,
@@ -148,8 +149,7 @@ return {
                 "kind": "ScalarField",
                 "name": "count",
                 "storageKey": null
-              },
-              (v1/*: any*/)
+              }
             ],
             "storageKey": null
           }
@@ -159,12 +159,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "65bfb6e63571b582ac8344e8e959e96f",
+    "cacheID": "129cfb7838a601695b5bedc56dd3865b",
     "id": null,
     "metadata": {},
     "name": "AppQuery",
     "operationKind": "query",
-    "text": "query AppQuery {\n  user(id: \"VXNlcjph\") {\n    id\n    name\n    ...UserComponent_user\n  }\n  viewer {\n    ...ShoppingList_list\n  }\n}\n\nfragment ShoppingList_list on Viewer {\n  shoppingList {\n    name\n    description\n    count\n    id\n  }\n}\n\nfragment UserComponent_user on User {\n  name\n}\n"
+    "text": "query AppQuery {\n  user(id: \"VXNlcjph\") {\n    id\n    name\n    ...UserComponent_user\n  }\n  viewer {\n    ...ShoppingList_list\n  }\n}\n\nfragment ShoppingListItem_item on ShoppingListItem {\n  name\n  description\n  count\n}\n\nfragment ShoppingList_list on Viewer {\n  shoppingList {\n    id\n    ...ShoppingListItem_item\n  }\n}\n\nfragment UserComponent_user on User {\n  name\n}\n"
   }
 };
 })();

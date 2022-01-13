@@ -37,8 +37,6 @@ const preloadedQuery = loadQuery(RelayEnvironment, AppQuery, {
 function App(props) {
   const data = usePreloadedQuery(AppQuery, props.preloadedQuery);
 
-  console.log(data);
-
   return (
     <div className="App">
       <header className="App-header">
