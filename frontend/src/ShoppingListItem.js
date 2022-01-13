@@ -5,7 +5,7 @@ import type {ShoppingListItem_item$key} from 'ShoppingList_list.graphql';
 import React, { useState } from 'react';
 import {useFragment} from 'react-relay';
 
-import ShoppingListItemEditor from './ShoppingListItemEditor';
+import { ShoppingListItemEditor } from './ShoppingListItemEditor';
 
 type Props = {
   item: ShoppingListItem_item$key

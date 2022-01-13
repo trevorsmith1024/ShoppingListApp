@@ -5,7 +5,7 @@ import {useFragment, useMutation} from 'react-relay';
 
 import ShoppingListItemForm from './ShoppingListItemForm';
 
-export default function ShoppingListItemEditor(props) {
+export function ShoppingListItemEditor({item}) {
   const data = useFragment(
     graphql`
       fragment ShoppingListItemEditor_item on ShoppingListItem {
@@ -15,10 +15,10 @@ export default function ShoppingListItemEditor(props) {
         count
       }
     `,
-    props.item
+    item
   );
 
-  const [commit, isInFlight] = useMutation(graphql`
+  const mutation = useMutation(graphql`
     mutation ShoppingListItemEditorMutation($input: EditShoppingListItemInput!) {
       editShoppingListItem(input: $input) {
         name
@@ -28,40 +28,28 @@ export default function ShoppingListItemEditor(props) {
     }
   `)
 
-  const handleSubmit = useCallback(formData => {
-    commit({
-      variables: {
-        input: {
-          ...formData
-        }
-      }
-    })
+  return <ShoppingListItemModal mutation={mutation} initialData={data} />
+}
+
+export function ShoppingListItemCreator(props) {
+  //create mutation
+  //const [commit, isInFlight] = useMutation(graphql` `) 
+
+  return <ShoppingListItemModal/>
+}
+
+function ShoppingListItemModal(props) {
+  const [commit, isInFlight] = props.mutation;
+
+  const onSubmit = useCallback(input => {
+    commit({ variables: { input } })
   })
-
-
 
   if (isInFlight) {
     return <div>loading</div>
   }
 
-  return <div>
-    <pre style={{textAlign: 'left'}}>
-      {JSON.stringify(data, null, 2)}
-    </pre>
-    <ShoppingListItemForm initialData={data} onSubmit={handleSubmit}/>
-    <button
-      onClick={() => {
-        commit({
-          variables: {
-            input: {
-              ...data,
-              count: data.count * 2
-            }
-          }
-        })
-      }}
-    >
-      Double
-    </button>
-  </div>
+  return <ShoppingListItemForm
+    initialData={props.initialData}
+    onSubmit={onSubmit}/>
 }
