@@ -1,5 +1,6 @@
 const {
   GraphQLObjectType,
+  GraphQLNonNull,
   GraphQLInputObjectType,
   GraphQLList,
   GraphQLString,
@@ -7,22 +8,24 @@ const {
   GraphQLSchema } = require('graphql');
 const { fromGlobalId, globalIdField, nodeInterface, nodeField } = require('./nodeUtils');
 
+const shoppingListItemFields = {
+  id: globalIdField(),
+  name: { type: new GraphQLNonNull(GraphQLString) },
+  description: { type: new GraphQLNonNull(GraphQLString) },
+  count: { type: new GraphQLNonNull(GraphQLInt) },
+}
+
+const { id: _, newShoppingListItemFields } = shoppingListItemFields;
+
 const shoppingListItemType = new GraphQLObjectType({
   name: 'ShoppingListItem',
-  fields: {
-    id: globalIdField(),
-    name: { type: GraphQLString },
-    description: { type: GraphQLString },
-    count: { type: GraphQLInt },
-  },
+  fields: shoppingListItemFields,
   interfaces: [nodeInterface]
 });
 
 const editShoppingListItemInput = new GraphQLInputObjectType({
   name: 'EditShoppingListItemInput',
-  fields: {
-
-  }
+  fields: shoppingListItemFields
 })
 
 const mutations = {

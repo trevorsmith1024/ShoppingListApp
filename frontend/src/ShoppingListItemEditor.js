@@ -1,7 +1,7 @@
 import graphql from 'babel-plugin-relay/macro';
 
 import React from 'react';
-import {useFragment} from 'react-relay';
+import {useFragment, useMutation} from 'react-relay';
 
 export default function ShoppingListItemEditor(props) {
   const data = useFragment(

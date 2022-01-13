@@ -1,11 +1,11 @@
 const { nodeDefinitions, fromGlobalId, globalIdField } = require('graphql-relay');
 
-const fakeDatabase = require('./fakeDatabase');
+const { getItem } = require('./fakeDatabase');
 
 const { nodeInterface, nodeField } = nodeDefinitions(
   (globalId) => {
-    const { type: __type, id } = fromGlobalId(globalId);
-    return { __type, ...fakeDatabase[__type][id] };
+    const { type, id } = fromGlobalId(globalId);
+    return getItem(type, id);
   },
   ({ __type }) => __type,
 );
