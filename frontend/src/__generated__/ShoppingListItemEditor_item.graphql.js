@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<7eedeb9e6c323632faffc29a6fd813b8>>
+ * @generated SignedSource<<8346a0e2d21bf56c23c48650ccb7df0b>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -11,21 +11,19 @@
 
 /*::
 import type { Fragment, ReaderFragment } from 'relay-runtime';
-type ShoppingListItemEditor_item$fragmentType = any;
 import type { FragmentType } from "relay-runtime";
-declare export opaque type ShoppingListItem_item$fragmentType: FragmentType;
-export type ShoppingListItem_item$ref = ShoppingListItem_item$fragmentType;
-export type ShoppingListItem_item$data = {|
+declare export opaque type ShoppingListItemEditor_item$fragmentType: FragmentType;
+export type ShoppingListItemEditor_item$ref = ShoppingListItemEditor_item$fragmentType;
+export type ShoppingListItemEditor_item$data = {|
   +name: ?string,
   +description: ?string,
   +count: ?number,
-  +$fragmentSpreads: ShoppingListItemEditor_item$fragmentType,
-  +$fragmentType: ShoppingListItem_item$fragmentType,
+  +$fragmentType: ShoppingListItemEditor_item$fragmentType,
 |};
-export type ShoppingListItem_item = ShoppingListItem_item$data;
-export type ShoppingListItem_item$key = {
-  +$data?: ShoppingListItem_item$data,
-  +$fragmentSpreads: ShoppingListItem_item$fragmentType,
+export type ShoppingListItemEditor_item = ShoppingListItemEditor_item$data;
+export type ShoppingListItemEditor_item$key = {
+  +$data?: ShoppingListItemEditor_item$data,
+  +$fragmentSpreads: ShoppingListItemEditor_item$fragmentType,
   ...
 };
 */
@@ -34,7 +32,7 @@ var node/*: ReaderFragment*/ = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "ShoppingListItem_item",
+  "name": "ShoppingListItemEditor_item",
   "selections": [
     {
       "alias": null,
@@ -56,20 +54,15 @@ var node/*: ReaderFragment*/ = {
       "kind": "ScalarField",
       "name": "count",
       "storageKey": null
-    },
-    {
-      "args": null,
-      "kind": "FragmentSpread",
-      "name": "ShoppingListItemEditor_item"
     }
   ],
   "type": "ShoppingListItem",
   "abstractKey": null
 };
 
-(node/*: any*/).hash = "9f7c307be6a601e4250da77c47e6bfd1";
+(node/*: any*/).hash = "06c6be0b836320e21e421d94220f3f46";
 
 module.exports = ((node/*: any*/)/*: Fragment<
-  ShoppingListItem_item$fragmentType,
-  ShoppingListItem_item$data,
+  ShoppingListItemEditor_item$fragmentType,
+  ShoppingListItemEditor_item$data,
 >*/);

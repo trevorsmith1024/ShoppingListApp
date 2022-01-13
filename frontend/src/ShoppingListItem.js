@@ -2,8 +2,10 @@ import graphql from 'babel-plugin-relay/macro';
 
 import type {ShoppingListItem_item$key} from 'ShoppingList_list.graphql';
 
-import React from 'react';
+import React, { useState } from 'react';
 import {useFragment} from 'react-relay';
+
+import ShoppingListItemEditor from './ShoppingListItemEditor';
 
 type Props = {
   item: ShoppingListItem_item$key
@@ -16,14 +18,27 @@ function ShoppingListItem(props: Props) {
         name
         description
         count
+        ...ShoppingListItemEditor_item
       }
     `,
     props.item
   );
 
+  const [editing, setEditing] = useState(false);
+
+  const { name, description, count } = data;
+
   return (
     <>
-      <p>Item: {JSON.stringify(data, null, 2)}</p>
+      <div>Item: {name}</div>
+      <div>Description: {description}</div>
+      <div>Count: {count}</div>
+      <button onClick={() => setEditing(!editing)}>
+        Edit
+      </button>
+      {editing && (
+        <ShoppingListItemEditor item={data}/>
+      )}
     </>
   );
 }

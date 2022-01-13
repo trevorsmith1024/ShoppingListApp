@@ -2,54 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const { graphqlHTTP } = require('express-graphql');
 const { GraphQLObjectType, GraphQLList, GraphQLString, GraphQLInt, GraphQLSchema } = require('graphql');
-const { nodeDefinitions, fromGlobalId, globalIdField } = require('graphql-relay');
+const utils = require('./src/utils');
+const { fromGlobalId, globalIdField, nodeInterface, nodeField } = require('./src/nodeUtils');
 
-const utils = {
-  typedDbResolver: (type) => (_, { id: globalId }) => {
-    return fakeDatabase[type][fromGlobalId(globalId).id]
-  }
-}
+const { shoppingListItemType, mutations: shoppingListMutations } = require('./src/shoppingListItem');
 
-const fakeDatabase = {
-  User: {
-    'a': {
-      id: 'a',
-      name: 'alice',
-    },
-    'b': {
-      id: 'b',
-      name: 'bob',
-    },
-  },
-  ShoppingList: [{
-    id: 0,
-    name: 'Item 1',
-    description: 'Most important thing',
-    count: 1
-  }]
-};
-
-const { nodeInterface, nodeField } = nodeDefinitions(
-  (globalId) => {
-    const { type, id } = fromGlobalId(globalId);
-    return fakeDatabase[type][id];
-  },
-  //infer graphql type from returned object
-  (obj) => {
-    //there are only userTypes right now
-    return 'User';
-  },
-);
-
-const shoppingListItemType = new GraphQLObjectType({
-  name: 'ShoppingListItem',
-  fields: {
-    id: globalIdField(),
-    name: { type: GraphQLString },
-    description: { type: GraphQLString },
-    count: { type: GraphQLInt },
-  }
-});
+const fakeDatabase = require('./src/fakeDatabase');
 
 const viewerType = new GraphQLObjectType({
   name: 'Viewer',
@@ -89,6 +47,14 @@ const queryType = new GraphQLObjectType({
     }
   }
 });
+
+
+const mutationType = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    ...shoppingListMutations
+  }
+})
 
 const schema = new GraphQLSchema({query: queryType});
 

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<4f57760bae0355b9c7b5f0a2e9cf5b40>>
+ * @generated SignedSource<<219f334a51da47a944e28b8e880c2818>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -159,12 +159,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "129cfb7838a601695b5bedc56dd3865b",
+    "cacheID": "aa8454eaf496e3f5f42ab3b02562d345",
     "id": null,
     "metadata": {},
     "name": "AppQuery",
     "operationKind": "query",
-    "text": "query AppQuery {\n  user(id: \"VXNlcjph\") {\n    id\n    name\n    ...UserComponent_user\n  }\n  viewer {\n    ...ShoppingList_list\n  }\n}\n\nfragment ShoppingListItem_item on ShoppingListItem {\n  name\n  description\n  count\n}\n\nfragment ShoppingList_list on Viewer {\n  shoppingList {\n    id\n    ...ShoppingListItem_item\n  }\n}\n\nfragment UserComponent_user on User {\n  name\n}\n"
+    "text": "query AppQuery {\n  user(id: \"VXNlcjph\") {\n    id\n    name\n    ...UserComponent_user\n  }\n  viewer {\n    ...ShoppingList_list\n  }\n}\n\nfragment ShoppingListItemEditor_item on ShoppingListItem {\n  name\n  description\n  count\n}\n\nfragment ShoppingListItem_item on ShoppingListItem {\n  name\n  description\n  count\n  ...ShoppingListItemEditor_item\n}\n\nfragment ShoppingList_list on Viewer {\n  shoppingList {\n    id\n    ...ShoppingListItem_item\n  }\n}\n\nfragment UserComponent_user on User {\n  name\n}\n"
   }
 };
 })();
