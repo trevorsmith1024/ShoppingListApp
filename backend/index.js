@@ -1,18 +1,24 @@
 const express = require('express');
 const cors = require('cors');
 const { graphqlHTTP } = require('express-graphql');
-const { GraphQLObjectType, GraphQLList, GraphQLString, GraphQLInt, GraphQLSchema } = require('graphql');
+const {
+  GraphQLObjectType,
+  GraphQLNonNull,
+  GraphQLInputObjectType,
+  GraphQLList,
+  GraphQLString,
+  GraphQLInt,
+  GraphQLSchema } = require('graphql');
 const { fromGlobalId, globalIdField, nodeInterface, nodeField } = require('./src/nodeUtils');
 
 const { shoppingListItemType, mutations: shoppingListMutations } = require('./src/shoppingListItem');
-
 const { getList } = require('./src/fakeDatabase');
 
 const viewerType = new GraphQLObjectType({
   name: 'Viewer',
   fields: {
     shoppingList: {
-      type: new GraphQLList(shoppingListItemType),
+      type: new GraphQLNonNull(new GraphQLList(new GraphQLNonNull(shoppingListItemType))),
       resolve: (ctx, args) => getList('ShoppingListItem')
     },
   }

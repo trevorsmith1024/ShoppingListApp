@@ -1,5 +1,4 @@
 const { nodeDefinitions, fromGlobalId, globalIdField } = require('graphql-relay');
-
 const { getItem } = require('./fakeDatabase');
 
 const { nodeInterface, nodeField } = nodeDefinitions(
