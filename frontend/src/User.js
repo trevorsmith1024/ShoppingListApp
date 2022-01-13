@@ -9,7 +9,7 @@ type Props = {
   user: UserComponent_user$key,
 };
 
-function UserComponent(props) {
+function UserComponent(props: Props) {
   const data = useFragment(
     graphql`
       fragment UserComponent_user on User {
