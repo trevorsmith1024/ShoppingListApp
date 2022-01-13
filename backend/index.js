@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { graphqlHTTP } = require('express-graphql');
 const { GraphQLObjectType, GraphQLString, GraphQLSchema } = require('graphql');
 const { nodeDefinitions, fromGlobalId, globalIdField } = require('graphql-relay');
@@ -61,6 +62,7 @@ const queryType = new GraphQLObjectType({
 const schema = new GraphQLSchema({query: queryType});
 
 const app = express();
+app.use(cors());
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql: true,
