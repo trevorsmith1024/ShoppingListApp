@@ -17,11 +17,24 @@ type Query {
     id: ID!
   ): Node
   user(id: String): User
+  viewer: Viewer
+}
+
+type ShoppingListItem {
+  """The ID of an object"""
+  id: ID!
+  name: String
+  description: String
+  count: Int
 }
 
 type User implements Node {
   """The ID of an object"""
   id: ID!
   name: String
+}
+
+type Viewer {
+  shoppingList: [ShoppingListItem]
 }
 

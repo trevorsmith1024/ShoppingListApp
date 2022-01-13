@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { graphqlHTTP } = require('express-graphql');
-const { GraphQLObjectType, GraphQLString, GraphQLSchema } = require('graphql');
+const { GraphQLObjectType, GraphQLList, GraphQLString, GraphQLInt, GraphQLSchema } = require('graphql');
 const { nodeDefinitions, fromGlobalId, globalIdField } = require('graphql-relay');
 
 const utils = {
@@ -10,7 +10,6 @@ const utils = {
   }
 }
 
-// Maps id to User object
 const fakeDatabase = {
   User: {
     'a': {
@@ -21,7 +20,13 @@ const fakeDatabase = {
       id: 'b',
       name: 'bob',
     },
-  }
+  },
+  ShoppingList: [{
+    id: 0,
+    name: 'Item 1',
+    description: 'Most important thing',
+    count: 1
+  }]
 };
 
 const { nodeInterface, nodeField } = nodeDefinitions(
@@ -35,6 +40,28 @@ const { nodeInterface, nodeField } = nodeDefinitions(
     return 'User';
   },
 );
+
+const shoppingListItemType = new GraphQLObjectType({
+  name: 'ShoppingListItem',
+  fields: {
+    id: globalIdField(),
+    name: { type: GraphQLString },
+    description: { type: GraphQLString },
+    count: { type: GraphQLInt },
+  }
+});
+
+const viewerType = new GraphQLObjectType({
+  name: 'Viewer',
+  fields: {
+    shoppingList: {
+      type: new GraphQLList(shoppingListItemType),
+      resolve: (ctx, args) => {
+        return fakeDatabase.ShoppingList;
+      }
+    },
+  }
+})
 
 const userType = new GraphQLObjectType({
   name: 'User',
@@ -56,6 +83,10 @@ const queryType = new GraphQLObjectType({
       },
       resolve: utils.typedDbResolver('User')
     },
+    viewer: {
+      type: viewerType,
+      resolve: () => ({})
+    }
   }
 });
 
