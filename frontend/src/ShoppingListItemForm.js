@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export default function ShoppingListItemForm({ initialData, onSubmit }) {
   const [formData, setFormData] = useState(initialData || {
-    name: 'def', description: 'ault', count: 1
+    name: '', description: '', count: 1
   }) 
 
   const updateField = (fieldName, e) => {

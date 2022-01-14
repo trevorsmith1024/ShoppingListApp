@@ -9,6 +9,9 @@ import {
 } from 'react-relay/hooks';
 import RelayEnvironment from './RelayEnvironment';
 
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, Box, AppBar, Container } from '@mui/material';
+
 import ShoppingList from './ShoppingList';
 
 const { Suspense } = React;
@@ -32,21 +35,27 @@ function App(props) {
   const data = usePreloadedQuery(AppQuery, props.preloadedQuery);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <ShoppingList viewer={data.viewer}/>
-      </header>
-    </div>
+    <Container>
+      <AppBar>
+        Shopping List
+      </AppBar>
+      <ShoppingList viewer={data.viewer}/>
+    </Container>
   );
 }
 
+const theme = createTheme();
+
 function AppRoot(props) {
   return (
-    <RelayEnvironmentProvider environment={RelayEnvironment}>
-      <Suspense fallback={'Loading...'}>
-        <App preloadedQuery={preloadedQuery} />
-      </Suspense>
-    </RelayEnvironmentProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline/>
+      <RelayEnvironmentProvider environment={RelayEnvironment}>
+        <Suspense fallback={'Loading...'}>
+          <App preloadedQuery={preloadedQuery} />
+        </Suspense>
+      </RelayEnvironmentProvider>
+    </ThemeProvider>
   );
 }
 
