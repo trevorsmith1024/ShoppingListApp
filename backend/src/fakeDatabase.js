@@ -19,6 +19,13 @@ const editItem = (type, id, values) => {
   return getItem(type, id);
 }
 
+const createItem = (type, values) => {
+  const dataSet = db[type];
+  const id = Object.keys(dataSet).length;
+  db[type][id] = values;
+  return getItem(type, id);
+}
+
 const getList = (type) => {
   const listObject = db[type];
   return Object.keys(listObject).map(id =>
@@ -29,5 +36,6 @@ const getList = (type) => {
 module.exports = {
   getItem,
   editItem,
+  createItem,
   getList
 }

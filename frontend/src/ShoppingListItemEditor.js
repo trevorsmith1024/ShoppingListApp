@@ -19,7 +19,7 @@ export function ShoppingListItemEditor({item}) {
   );
 
   const mutation = useMutation(graphql`
-    mutation ShoppingListItemEditorMutation($input: EditShoppingListItemInput!) {
+    mutation ShoppingListItemEditorEditMutation($input: EditShoppingListItemInput!) {
       editShoppingListItem(input: $input) {
         name
         description
@@ -32,17 +32,38 @@ export function ShoppingListItemEditor({item}) {
 }
 
 export function ShoppingListItemCreator(props) {
-  //create mutation
-  //const [commit, isInFlight] = useMutation(graphql` `) 
+  const mutation = useMutation(graphql`
+    mutation ShoppingListItemEditorCreateMutation($input: CreateShoppingListItemInput) {
+      createShoppingListItem(input: $input){
+        id
+        name
+        description
+        count
+      }
+    }
+  `) 
 
-  return <ShoppingListItemModal/>
+  //this would not have to be done manually if a connection was used
+  const updater = (store, payload) => {
+    const root = store.getRoot();
+    const viewer = root.getLinkedRecord('viewer')
+    const newNode = store.getRootField('createShoppingListItem');
+    const newShoppingList =
+      [ ...viewer.getLinkedRecords('shoppingList'), newNode ]
+    viewer.setLinkedRecords(newShoppingList, 'shoppingList')
+  }
+
+  return <ShoppingListItemModal mutation={mutation} updater={updater}/>
 }
 
-function ShoppingListItemModal(props) {
-  const [commit, isInFlight] = props.mutation;
+function ShoppingListItemModal({mutation, updater, initialData}) {
+  const [commit, isInFlight] = mutation;
 
   const onSubmit = useCallback(input => {
-    commit({ variables: { input } })
+    commit({
+      variables: { input },
+      updater
+    })
   })
 
   if (isInFlight) {
@@ -50,6 +71,6 @@ function ShoppingListItemModal(props) {
   }
 
   return <ShoppingListItemForm
-    initialData={props.initialData}
+    initialData={initialData}
     onSubmit={onSubmit}/>
 }

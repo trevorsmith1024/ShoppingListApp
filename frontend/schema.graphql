@@ -4,6 +4,12 @@ directive @specifiedBy(
   url: String!
 ) on SCALAR
 
+input CreateShoppingListItemInput {
+  name: String!
+  description: String!
+  count: Int!
+}
+
 input EditShoppingListItemInput {
   id: ID!
   name: String!
@@ -13,6 +19,7 @@ input EditShoppingListItemInput {
 
 type Mutation {
   editShoppingListItem(input: EditShoppingListItemInput): ShoppingListItem!
+  createShoppingListItem(input: CreateShoppingListItemInput): ShoppingListItem!
 }
 
 """An object with an ID"""

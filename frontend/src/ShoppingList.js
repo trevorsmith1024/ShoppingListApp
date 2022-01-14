@@ -29,18 +29,18 @@ function ShoppingList(props: Props) {
 
   return (
     <>
-      <h1>ShoppingList</h1>
-      {
-        data.shoppingList.map(item =>
-          <ShoppingListItem key={item.id} item={item}/>
-        )
-      }
       <button onClick={() => setNewItemModalOpen(!newItemModalOpen)}>
         New item
       </button>
       {
-        false && newItemModalOpen && (
+        newItemModalOpen && (
           <ShoppingListItemCreator />          
+        )
+      }
+      <h1>ShoppingList</h1>
+      {
+        data.shoppingList.map(item =>
+          <ShoppingListItem key={item.id} item={item}/>
         )
       }
     </>
