@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { Typography, Container, Box, Button, Modal } from '@mui/material';
+
 export default function ShoppingListItemForm({ initialData, onSubmit }) {
   const [formData, setFormData] = useState(initialData || {
     name: '', description: '', count: 1
@@ -16,12 +18,12 @@ export default function ShoppingListItemForm({ initialData, onSubmit }) {
   const handleDescChange = (e) => updateField('description', e);
 
   return (
-    <div>
+    <Box>
       <input type='text' onChange={handleNameChange} value={formData.name}/>
       <input type='text' onChange={handleDescChange} value={formData.description}/>
       <button onClick={() => onSubmit(formData)}>
         Send
       </button>
-    </div>
+    </Box>
   )
 }

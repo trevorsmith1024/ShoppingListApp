@@ -10,7 +10,7 @@ import {
 import RelayEnvironment from './RelayEnvironment';
 
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, Box, AppBar, Container } from '@mui/material';
+import { CssBaseline, Typography, AppBar, Toolbar, Container } from '@mui/material';
 
 import ShoppingList from './ShoppingList';
 
@@ -31,20 +31,44 @@ const preloadedQuery = loadQuery(RelayEnvironment, AppQuery, {
   /* query variables */
 });
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#4D81B7',
+    },
+    outline: {
+      primary: '#C6C6C6'
+    }
+  },
+  typography: {
+    fontSize: 14,
+    h6: {
+      fontSize: "1.15rem"
+    }
+  },
+});
+
+const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
+
 function App(props) {
   const data = usePreloadedQuery(AppQuery, props.preloadedQuery);
 
   return (
-    <Container>
+    <>
       <AppBar>
-        Shopping List
+        <Toolbar>
+          <Typography variant='h6' sx={{ textTransform: 'uppercase' }}>
+            Shopping List
+          </Typography>
+        </Toolbar>
       </AppBar>
-      <ShoppingList viewer={data.viewer}/>
-    </Container>
+      <Offset/>
+      <Container>
+        <ShoppingList viewer={data.viewer}/>
+      </Container>
+    </>
   );
 }
-
-const theme = createTheme();
 
 function AppRoot(props) {
   return (

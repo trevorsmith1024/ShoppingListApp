@@ -2,16 +2,13 @@ import graphql from 'babel-plugin-relay/macro';
 
 import type {ShoppingListItem_item$key} from 'ShoppingList_list.graphql';
 
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import {useFragment} from 'react-relay';
 
+import ShoppingListContext from './ShoppingListContext';
 import { ShoppingListItemEditor } from './ShoppingListItemEditor';
 
-type Props = {
-  item: ShoppingListItem_item$key
-};
-
-function ShoppingListItem(props: Props) {
+function ShoppingListItem({item}) {
   const data = useFragment(
     graphql`
       fragment ShoppingListItem_item on ShoppingListItem {
@@ -21,24 +18,26 @@ function ShoppingListItem(props: Props) {
         ...ShoppingListItemEditor_item
       }
     `,
-    props.item
+    item
   );
 
-  const [editing, setEditing] = useState(false);
+  const setCurrentlyEditing = useContext(ShoppingListContext);
 
   const { name, description, count } = data;
+
+  const onClick = () => {
+    console.log('here', data);
+    setCurrentlyEditing(data);
+  }
 
   return (
     <>
       <div>Item: {name}</div>
       <div>Description: {description}</div>
       <div>Count: {count}</div>
-      <button onClick={() => setEditing(!editing)}>
+      <button onClick={onClick}>
         Edit
       </button>
-      {editing && (
-        <ShoppingListItemEditor item={data}/>
-      )}
     </>
   );
 }

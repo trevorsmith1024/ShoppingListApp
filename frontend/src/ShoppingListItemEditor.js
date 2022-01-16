@@ -1,8 +1,11 @@
 import graphql from 'babel-plugin-relay/macro';
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import {useFragment, useMutation} from 'react-relay';
 
+import { Typography, Container, Box, Button, Modal } from '@mui/material';
+
+import ShoppingListContext from './ShoppingListContext';
 import ShoppingListItemForm from './ShoppingListItemForm';
 
 export function ShoppingListItemEditor({item}) {
@@ -28,10 +31,10 @@ export function ShoppingListItemEditor({item}) {
     }
   `)
 
-  return <ShoppingListItemModal mutation={mutation} initialData={data} />
+  return <ShoppingListItemModal mutation={mutation} initialData={data}/>
 }
 
-export function ShoppingListItemCreator(props) {
+export function ShoppingListItemCreator() {
   const mutation = useMutation(graphql`
     mutation ShoppingListItemEditorCreateMutation($input: CreateShoppingListItemInput) {
       createShoppingListItem(input: $input){
@@ -59,10 +62,15 @@ export function ShoppingListItemCreator(props) {
 function ShoppingListItemModal({mutation, updater, initialData}) {
   const [commit, isInFlight] = mutation;
 
+  const setCurrentlyEditing = useContext(ShoppingListContext);
+
   const onSubmit = useCallback(input => {
     commit({
       variables: { input },
-      updater
+      updater,
+      onCompleted: () => {
+        setCurrentlyEditing(false);
+      }
     })
   })
 
@@ -70,7 +78,23 @@ function ShoppingListItemModal({mutation, updater, initialData}) {
     return <div>loading</div>
   }
 
-  return <ShoppingListItemForm
-    initialData={initialData}
-    onSubmit={onSubmit}/>
+  return <Modal open={true} onClose={() => setCurrentlyEditing(false)}>
+    <Box sx={modalStyle}>
+      <ShoppingListItemForm
+        initialData={initialData}
+        onSubmit={onSubmit}/>
+    </Box>
+  </Modal>
+}
+
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
 }
