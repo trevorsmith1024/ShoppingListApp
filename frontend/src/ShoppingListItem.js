@@ -25,10 +25,7 @@ function ShoppingListItem({item}) {
 
   const { name, description, count } = data;
 
-  const onClick = () => {
-    console.log('here', data);
-    setCurrentlyEditing(data);
-  }
+  const onClick = () => setCurrentlyEditing(data);
 
   return (
     <>

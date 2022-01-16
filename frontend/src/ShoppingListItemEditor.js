@@ -63,14 +63,13 @@ function ShoppingListItemModal({mutation, updater, initialData}) {
   const [commit, isInFlight] = mutation;
 
   const setCurrentlyEditing = useContext(ShoppingListContext);
+  const onDone = () => setCurrentlyEditing(false);
 
   const onSubmit = useCallback(input => {
     commit({
       variables: { input },
       updater,
-      onCompleted: () => {
-        setCurrentlyEditing(false);
-      }
+      onCompleted: onDone
     })
   })
 
@@ -78,7 +77,7 @@ function ShoppingListItemModal({mutation, updater, initialData}) {
     return <div>loading</div>
   }
 
-  return <Modal open={true} onClose={() => setCurrentlyEditing(false)}>
+  return <Modal open={true} onClose={onDone}>
     <Box sx={modalStyle}>
       <ShoppingListItemForm
         initialData={initialData}
