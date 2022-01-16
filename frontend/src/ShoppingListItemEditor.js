@@ -3,8 +3,6 @@ import graphql from 'babel-plugin-relay/macro';
 import React, { useCallback, useContext } from 'react';
 import {useFragment, useMutation} from 'react-relay';
 
-import { Typography, Container, Box, Button } from '@mui/material';
-
 import ShoppingListContext from './ShoppingListContext';
 import ShoppingListItemForm from './ShoppingListItemForm';
 
@@ -79,6 +77,7 @@ function ShoppingListItemControl({mutation, updater, initialData}) {
 
   return <ShoppingListItemForm
     initialData={initialData}
-    onSubmit={onSubmit}/>
+    onSubmit={onSubmit}
+    onCancel={onCompleted}/>
 }
 
