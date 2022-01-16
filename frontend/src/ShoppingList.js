@@ -87,8 +87,6 @@ function ShoppingList(props) {
     );
   }
 
-  console.log(editingNew, editingExisting)
-
   return <ShoppingListContext.Provider value={setCurrentlyEditing}>
     {
       editingNew ?
@@ -97,7 +95,7 @@ function ShoppingList(props) {
         <ShoppingListItemEditor item={currentlyEditing} /> :
         undefined
     }
-    {mainContent};
+    {mainContent}
   </ShoppingListContext.Provider>
 }
 
