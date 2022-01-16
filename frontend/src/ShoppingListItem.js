@@ -22,10 +22,9 @@ function ShoppingListItem({item}) {
   );
 
   const setCurrentlyEditing = useContext(ShoppingListContext);
+  const onClick = () => setCurrentlyEditing(data);
 
   const { name, description, count } = data;
-
-  const onClick = () => setCurrentlyEditing(data);
 
   return (
     <>
