@@ -3,7 +3,7 @@ import graphql from 'babel-plugin-relay/macro';
 import React, { useCallback, useContext } from 'react';
 import {useFragment, useMutation} from 'react-relay';
 
-import { Typography, Container, Box, Button, Modal } from '@mui/material';
+import { Typography, Container, Box, Button } from '@mui/material';
 
 import ShoppingListContext from './ShoppingListContext';
 import ShoppingListItemForm from './ShoppingListItemForm';
@@ -31,7 +31,7 @@ export function ShoppingListItemEditor({item}) {
     }
   `)
 
-  return <ShoppingListItemModal mutation={mutation} initialData={data}/>
+  return <ShoppingListItemControl mutation={mutation} initialData={data}/>
 }
 
 export function ShoppingListItemCreator() {
@@ -56,20 +56,20 @@ export function ShoppingListItemCreator() {
     viewer.setLinkedRecords(newShoppingList, 'shoppingList')
   }
 
-  return <ShoppingListItemModal mutation={mutation} updater={updater}/>
+  return <ShoppingListItemControl mutation={mutation} updater={updater}/>
 }
 
-function ShoppingListItemModal({mutation, updater, initialData}) {
+function ShoppingListItemControl({mutation, updater, initialData}) {
   const [commit, isInFlight] = mutation;
 
   const setCurrentlyEditing = useContext(ShoppingListContext);
-  const onDone = () => setCurrentlyEditing(false);
+  const onCompleted = () => setCurrentlyEditing(false);
 
   const onSubmit = useCallback(input => {
     commit({
       variables: { input },
       updater,
-      onCompleted: onDone
+      onCompleted
     })
   })
 
@@ -77,23 +77,8 @@ function ShoppingListItemModal({mutation, updater, initialData}) {
     return <div>loading</div>
   }
 
-  return <Modal open={true} onClose={onDone}>
-    <Box sx={modalStyle}>
-      <ShoppingListItemForm
-        initialData={initialData}
-        onSubmit={onSubmit}/>
-    </Box>
-  </Modal>
+  return <ShoppingListItemForm
+    initialData={initialData}
+    onSubmit={onSubmit}/>
 }
 
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-}

@@ -5,7 +5,7 @@ import type {ShoppingList_list$key} from 'ShoppingList_list.graphql';
 import React, {useState} from 'react';
 import {useFragment} from 'react-relay';
 
-import { Typography, Container, Box, Button } from '@mui/material';
+import { Typography, Container, Box, Button, Modal } from '@mui/material';
 
 import ShoppingListContext from './ShoppingListContext'
 
@@ -42,6 +42,7 @@ function ShoppingList(props) {
 
   const [currentlyEditing, setCurrentlyEditing] = useState(false);
   const editNew = () => setCurrentlyEditing(true);
+  const editNone = () => setCurrentlyEditing(false);
 
   const editingNew = currentlyEditing === true;
   const editingExisting = currentlyEditing !== false;
@@ -87,16 +88,35 @@ function ShoppingList(props) {
     );
   }
 
-  return <ShoppingListContext.Provider value={setCurrentlyEditing}>
-    {
+  const editorForm = 
       editingNew ?
         <ShoppingListItemCreator/> :
       editingExisting ?
         <ShoppingListItemEditor item={currentlyEditing} /> :
-        undefined
-    }
+        false;
+
+  return <ShoppingListContext.Provider value={setCurrentlyEditing}>
+    { editorForm && (
+      <Modal open={true} onClose={editNone}>
+        <Box sx={modalStyle}>
+          {editorForm}
+        </Box>
+      </Modal>
+    )}
     {mainContent}
   </ShoppingListContext.Provider>
+}
+
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
 }
 
 export default ShoppingList;
