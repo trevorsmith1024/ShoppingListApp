@@ -5,27 +5,15 @@ import type {ShoppingList_list$key} from 'ShoppingList_list.graphql';
 import React, {useState} from 'react';
 import {useFragment} from 'react-relay';
 
-import { Typography, Container, Box, Button, Modal, AppBar } from '@mui/material';
+import { Typography, Container, Box, Button, Modal, AppBar, Toolbar } from '@mui/material';
+
+import { AppBarSpacer } from './Utils';
+import CancelButton from './CancelButton.svg';
 
 import ShoppingListContext from './ShoppingListContext'
 
 import ShoppingListItem from './ShoppingListItem';
 import { ShoppingListItemCreator, ShoppingListItemEditor } from './ShoppingListItemEditor';
-
-const borderStyles = {
-  border: 1,
-  borderColor: 'outline.primary',
-  borderRadius: 1
-}
-
-const flexConfigurationStyles = {
-  vertical: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-}
 
 function ShoppingList(props) {
   const data = useFragment(
@@ -47,62 +35,61 @@ function ShoppingList(props) {
   const editingNew = currentlyEditing === true;
   const editingExisting = currentlyEditing !== false;
 
-  let mainContent;
-
-  if (!data.shoppingList.length) {
-    mainContent = (
-      <Box mt={'110px'}>
-        <Box sx={{ ...borderStyles, ...flexConfigurationStyles.vertical,
-            height: 290,
-            width: 619,
-            margin: '0 auto',
-        }}>
-          <Typography>
-            Your shopping list is empty :(
-          </Typography>
-          <Button style={{ margin: '1rem' }} variant='contained' onClick={editNew}>
-              Add your first item
-          </Button>
-          {/* Spacer for flex flow */}
-          <div style={{ height: '1em' }}></div>
-        </Box>
+  const mainContent = !data.shoppingList.length ?
+    <Box mt={'110px'}>
+      <Box sx={{ ...borderStyles, ...flexConfigurationStyles.vertical,
+          height: 290,
+          width: 619,
+          margin: '0 auto',
+      }}>
+        <Typography>
+          Your shopping list is empty :(
+        </Typography>
+        <Button style={{ margin: '1rem' }} variant='contained' onClick={editNew}>
+            Add your first item
+        </Button>
+        {/* Spacer for flex flow */}
+        <div style={{ height: '1em' }}></div>
       </Box>
-    )
-  }
-
-  else {
-    mainContent = (
-      <>
-        <Box sx={{ ...borderStyles }} >
-          <h1>ShoppingList</h1>
-          {
-            data.shoppingList.map(item =>
-              <ShoppingListItem key={item.id} item={item}/>
-            )
-          }
-          <button onClick={editNew}>
-            New item
-          </button>
-        </Box>
-      </>
-    );
-  }
+    </Box>
+    :
+    <Box sx={{ ...borderStyles }} >
+      <h1>ShoppingList</h1>
+      {
+        data.shoppingList.map(item =>
+          <ShoppingListItem key={item.id} item={item}/>
+        )
+      }
+      <button onClick={editNew}>
+        New item
+      </button>
+    </Box>
 
   const editorForm = 
-      editingNew ?
-        <ShoppingListItemCreator/> :
-      editingExisting ?
-        <ShoppingListItemEditor item={currentlyEditing} /> :
-        false;
+    editingNew ?
+      <ShoppingListItemCreator/> :
+    editingExisting ?
+      <ShoppingListItemEditor item={currentlyEditing} /> :
+      false;
 
   return <ShoppingListContext.Provider value={setCurrentlyEditing}>
     { editorForm && (
       <Modal open={true} onClose={editNone}>
         <Box sx={modalStyle}>
-          <AppBar color='secondary'>
-            Stuff
+          <AppBar color='secondary' sx={{borderBottom: '1px solid', borderColor: '#D5DFE9'}}>
+            <Toolbar>
+              <Typography variant='h6' sx={{ textTransform: 'uppercase', flexGrow: 1 }}>
+                Shopping List
+              </Typography>
+              <Button onClick={editNone} sx={{padding: 0, minWidth: 0}}>
+                  <img src={CancelButton}/>
+              </Button>
+            </Toolbar>
           </AppBar>
-          {editorForm}
+          <AppBarSpacer/>
+          <Container sx={{height: '100%', p: 4}}>
+            {editorForm}
+          </Container>
         </Box>
       </Modal>
     )}
@@ -110,7 +97,24 @@ function ShoppingList(props) {
   </ShoppingListContext.Provider>
 }
 
+const borderStyles = {
+  border: 1,
+  borderColor: 'outline.primary',
+  borderRadius: 1
+}
+
+const flexConfigurationStyles = {
+  vertical: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+}
+
 const modalStyle = {
+  display: 'flex',
+  flexDirection: 'column',
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -118,9 +122,10 @@ const modalStyle = {
   width: 560,
   height: 768,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
+  outlineWidth: 0,
+  border: 0,
+  borderBottom: '5px solid',
+  borderColor: 'primary.main',
 }
 
 export default ShoppingList;

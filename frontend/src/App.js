@@ -12,6 +12,8 @@ import RelayEnvironment from './RelayEnvironment';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, Typography, AppBar, Toolbar, Container } from '@mui/material';
 
+import { AppBarSpacer } from './Utils';
+
 import ShoppingList from './ShoppingList';
 
 const { Suspense } = React;
@@ -36,19 +38,21 @@ const theme = createTheme({
     primary: {
       main: '#4D81B7',
     },
+    secondary: {
+      main: '#FAFAFA',
+    },
     outline: {
-      primary: '#C6C6C6'
-    }
+      primary: '#C6C6C6',
+    },
   },
   typography: {
     fontSize: 14,
     h6: {
-      fontSize: "1.15rem"
+      fontSize: "1.15rem",
     }
   },
+  shadows: Array(12).fill('none')
 });
-
-const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 function App(props) {
   const data = usePreloadedQuery(AppQuery, props.preloadedQuery);
@@ -62,7 +66,7 @@ function App(props) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Offset/>
+      <AppBarSpacer/>
       <Container>
         <ShoppingList viewer={data.viewer}/>
       </Container>
