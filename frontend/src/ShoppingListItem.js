@@ -25,8 +25,6 @@ function ShoppingListItem({item}) {
     item
   );
 
-  const { id, name, description, purchased, count } = data;
-
   const [commit, isInFlight] = useMutation(graphql`
     mutation ShoppingListItemDeleteMutation($input: ID!) {
       deleteShoppingListItem(input: $input) { id }
@@ -39,6 +37,8 @@ function ShoppingListItem({item}) {
     }
   `)
 
+  const { id, name, description, purchased, count } = data;
+
   const setCurrentlyEditing = useContext(ShoppingListContext);
   const onClick = () => setCurrentlyEditing(data);
 
@@ -49,14 +49,14 @@ function ShoppingListItem({item}) {
   const handlePurchasedCheckboxChanged = (e) => {
     commitPurchaseUpdate({
       variables: { input:
-        { id, name, description, count, purchased: e.target.checked}
+        { id, name, description, count, purchased: e.target.checked }
       }
     })
   }
 
   const submitDelete = useCallback(() => {
     commit({
-      variables: { input: data.id },
+      variables: { input: id },
       updater: removeFromClientList('deleteShoppingListItem'),
       onCompleted: closeModal
     })
