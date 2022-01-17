@@ -6,7 +6,7 @@ import React, {useState} from 'react';
 import {useFragment} from 'react-relay';
 
 import { Typography, Container, Box, Button, Modal, AppBar, Toolbar } from '@mui/material';
-import { PrimaryButton, IconButton, borderStyles } from './Utils';
+import { PrimaryButton, IconButton, borderStyles, centeredModalStyle } from './Utils';
 
 import { StyledAppBar, AppBarSpacer } from './Utils';
 
@@ -115,17 +115,9 @@ const flexConfigurationStyles = {
 }
 
 const modalStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  ...centeredModalStyle,
   width: 560,
   height: 768,
-  bgcolor: 'background.paper',
-  outlineWidth: 0,
-  border: 0,
   borderBottom: '5px solid',
   borderColor: 'primary.main',
 }

@@ -51,6 +51,9 @@ export const AppBarSpacer = styled('div')(({ theme }) => theme.mixins.toolbar);
 export const PrimaryButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.button.main
 }));
+export const TextButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.text.primary
+}));
 export const IconButton = styled(Button)(({ theme }) => ({
   color: theme.palette.text.primary,
   padding: 0,
@@ -61,4 +64,14 @@ export const borderStyles = {
   border: 1,
   borderColor: 'outline.primary',
   borderRadius: 1
+}
+export const centeredModalStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: 'background.paper',
+  outlineWidth: 0,
 }
