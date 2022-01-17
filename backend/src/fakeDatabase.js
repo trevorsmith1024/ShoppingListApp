@@ -21,6 +21,15 @@ const createItem = (type, values) => {
   return getItem(type, id);
 }
 
+const deleteItem = (type, id) => {
+  if (!db[type][id]) {
+    throw new Error(`Object of type ${type} with id ${id} not found`);
+  }
+  const item = getItem(type, id);
+  delete db[type][id];
+  return item;
+}
+
 const getList = (type) => {
   const listObject = db[type];
   return Object.keys(listObject).map(id =>
@@ -32,5 +41,6 @@ module.exports = {
   getItem,
   editItem,
   createItem,
+  deleteItem,
   getList
 }

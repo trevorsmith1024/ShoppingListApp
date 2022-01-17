@@ -8,6 +8,7 @@ input CreateShoppingListItemInput {
   name: String!
   description: String!
   count: Int!
+  purchased: Boolean!
 }
 
 input EditShoppingListItemInput {
@@ -15,11 +16,13 @@ input EditShoppingListItemInput {
   name: String!
   description: String!
   count: Int!
+  purchased: Boolean!
 }
 
 type Mutation {
   editShoppingListItem(input: EditShoppingListItemInput): ShoppingListItem!
   createShoppingListItem(input: CreateShoppingListItemInput): ShoppingListItem!
+  deleteShoppingListItem(input: ID!): ShoppingListItem!
 }
 
 """An object with an ID"""
@@ -43,6 +46,7 @@ type ShoppingListItem implements Node {
   name: String!
   description: String!
   count: Int!
+  purchased: Boolean!
 }
 
 type Viewer {

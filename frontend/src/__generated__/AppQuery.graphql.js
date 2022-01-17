@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<45f1282f40a12ce8ef5573123289e7b8>>
+ * @generated SignedSource<<b0e0dab26e953d4308c19398fd6b2dbd>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -100,6 +100,13 @@ var node/*: ConcreteRequest*/ = {
                 "alias": null,
                 "args": null,
                 "kind": "ScalarField",
+                "name": "purchased",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
                 "name": "count",
                 "storageKey": null
               }
@@ -112,12 +119,12 @@ var node/*: ConcreteRequest*/ = {
     ]
   },
   "params": {
-    "cacheID": "dc73e4c1dde468b46c876bc4c8bb9ee0",
+    "cacheID": "5078d0bb8efbb815039dbdd22a1a7824",
     "id": null,
     "metadata": {},
     "name": "AppQuery",
     "operationKind": "query",
-    "text": "query AppQuery {\n  viewer {\n    ...ShoppingList_list\n  }\n}\n\nfragment ShoppingListItemEditor_item on ShoppingListItem {\n  id\n  name\n  description\n  count\n}\n\nfragment ShoppingListItem_item on ShoppingListItem {\n  name\n  description\n  ...ShoppingListItemEditor_item\n}\n\nfragment ShoppingList_list on Viewer {\n  shoppingList {\n    id\n    ...ShoppingListItem_item\n  }\n}\n"
+    "text": "query AppQuery {\n  viewer {\n    ...ShoppingList_list\n  }\n}\n\nfragment ShoppingListItemEditor_item on ShoppingListItem {\n  id\n  name\n  description\n  count\n  purchased\n}\n\nfragment ShoppingListItem_item on ShoppingListItem {\n  id\n  name\n  description\n  purchased\n  count\n  ...ShoppingListItemEditor_item\n}\n\nfragment ShoppingList_list on Viewer {\n  shoppingList {\n    id\n    ...ShoppingListItem_item\n  }\n}\n"
   }
 };
 

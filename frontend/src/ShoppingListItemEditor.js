@@ -3,6 +3,8 @@ import graphql from 'babel-plugin-relay/macro';
 import React, { useCallback, useContext } from 'react';
 import {useFragment, useMutation} from 'react-relay';
 
+import { addToClientList } from './Utils';
+
 import ShoppingListContext from './ShoppingListContext';
 import ShoppingListItemForm from './ShoppingListItemForm';
 
@@ -14,6 +16,7 @@ export function ShoppingListItemEditor({item}) {
         name
         description
         count
+        purchased
       }
     `,
     item
@@ -25,6 +28,7 @@ export function ShoppingListItemEditor({item}) {
         name
         description
         count
+        purchased
       }
     }
   `)
@@ -40,19 +44,13 @@ export function ShoppingListItemCreator() {
         name
         description
         count
+        purchased
       }
     }
   `) 
 
   //this would not have to be done manually if a connection was used
-  const updater = (store, payload) => {
-    const root = store.getRoot();
-    const viewer = root.getLinkedRecord('viewer')
-    const newNode = store.getRootField('createShoppingListItem');
-    const newShoppingList =
-      [ ...viewer.getLinkedRecords('shoppingList'), newNode ]
-    viewer.setLinkedRecords(newShoppingList, 'shoppingList')
-  }
+  const updater = addToClientList('createShoppingListItem')
 
   return <ShoppingListItemControl mutation={mutation} updater={updater}/>
 }

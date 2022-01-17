@@ -1,23 +1,20 @@
 import React, { useState, useCallback } from 'react';
 
-import { Typography, Box, Button, FormControl, TextField, InputLabel, Select, MenuItem, InputAdornment } from '@mui/material';
+import { Typography, Box, Button, FormControl, FormControlLabel, TextField, InputLabel, Select, MenuItem, InputAdornment, Checkbox } from '@mui/material';
 import { PrimaryButton, TextButton } from './Utils'
 
 export default function ShoppingListItemForm({ initialData, onSubmit, onCancel }) {
   const [formData, setFormData] = useState(initialData || {
-    name: '', description: '', count: ''
+    name: '', description: '', count: '', purchased: false
   }) 
 
-  const updateField = (fieldName, e) => {
-    setFormData({
-      ...formData,
-      [fieldName]: e.target.value
-    })
-  }
+  const updateField = (fieldName, value) =>
+    setFormData({ ...formData, [fieldName]: value })
 
-  const handleNameChange = (e) => updateField('name', e);
-  const handleDescChange = (e) => updateField('description', e);
-  const handleCountChange = useCallback(e => updateField('count', e));
+  const handleNameChange = useCallback(e => updateField('name', e.target.value));
+  const handleDescChange = useCallback(e => updateField('description', e.target.value));
+  const handleCountChange = useCallback(e => updateField('count', e.target.value));
+  const handlePurchasedChange = useCallback(e => updateField('purchased', e.target.checked))
 
   const validInput = formData.name && formData.description && formData.count;
 
@@ -66,6 +63,11 @@ export default function ShoppingListItemForm({ initialData, onSubmit, onCancel }
           <MenuItem value={3}>3</MenuItem>
         </Select>
       </FormControl>
+      { initialData && (
+        <FormControlLabel
+          control={<Checkbox checked={formData.purchased} onChange={handlePurchasedChange} />}
+          label="Purchased" />
+      )}
       <Box sx={{display: 'flex', justifyContent: 'flex-end', gap: 1, marginTop: 'auto'}}>
         <TextButton onClick={onCancel}>
           Cancel

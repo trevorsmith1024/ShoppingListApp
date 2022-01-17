@@ -75,3 +75,24 @@ export const centeredModalStyle = {
   bgcolor: 'background.paper',
   outlineWidth: 0,
 }
+
+const getViewer = (store) => store.getRoot().getLinkedRecord('viewer');
+
+//this would not have to be done manually if a connection was used
+export const addToClientList = rootField => store => {
+  const viewer = getViewer(store);
+  const newNode = store.getRootField(rootField);
+  const newShoppingList =
+    [ ...viewer.getLinkedRecords('shoppingList'), newNode ]
+  viewer.setLinkedRecords(newShoppingList, 'shoppingList')
+}
+
+export const removeFromClientList = rootField => store => {
+  const viewer = getViewer(store);
+  const oldNode = store.getRootField(rootField);
+  const newShoppingList =
+    viewer.getLinkedRecords('shoppingList').filter(n =>
+      n._dataID !== oldNode._dataID
+    )
+  viewer.setLinkedRecords(newShoppingList, 'shoppingList')
+}

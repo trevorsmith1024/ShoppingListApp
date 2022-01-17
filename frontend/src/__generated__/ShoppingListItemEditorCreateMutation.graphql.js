@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<1d76eb863f35ccc214cc17dae5cf4bb8>>
+ * @generated SignedSource<<a9c9db09f63af153e5078c1b7ad7fe48>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -15,6 +15,7 @@ export type CreateShoppingListItemInput = {|
   name: string,
   description: string,
   count: number,
+  purchased: boolean,
 |};
 export type ShoppingListItemEditorCreateMutation$variables = {|
   input?: ?CreateShoppingListItemInput,
@@ -26,6 +27,7 @@ export type ShoppingListItemEditorCreateMutation$data = {|
     +name: string,
     +description: string,
     +count: number,
+    +purchased: boolean,
   |},
 |};
 export type ShoppingListItemEditorCreateMutationResponse = ShoppingListItemEditorCreateMutation$data;
@@ -85,6 +87,13 @@ v1 = [
         "kind": "ScalarField",
         "name": "count",
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "purchased",
+        "storageKey": null
       }
     ],
     "storageKey": null
@@ -108,17 +117,17 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "12b551d828e89336953220bc9132ded8",
+    "cacheID": "49a22a715d36e49f1160e087d4298fab",
     "id": null,
     "metadata": {},
     "name": "ShoppingListItemEditorCreateMutation",
     "operationKind": "mutation",
-    "text": "mutation ShoppingListItemEditorCreateMutation(\n  $input: CreateShoppingListItemInput\n) {\n  createShoppingListItem(input: $input) {\n    id\n    name\n    description\n    count\n  }\n}\n"
+    "text": "mutation ShoppingListItemEditorCreateMutation(\n  $input: CreateShoppingListItemInput\n) {\n  createShoppingListItem(input: $input) {\n    id\n    name\n    description\n    count\n    purchased\n  }\n}\n"
   }
 };
 })();
 
-(node/*: any*/).hash = "0ba462c17e3891f6c8e8a11eb30ed180";
+(node/*: any*/).hash = "6542e8edfbe7673007147aaa736517a3";
 
 module.exports = ((node/*: any*/)/*: Mutation<
   ShoppingListItemEditorCreateMutation$variables,

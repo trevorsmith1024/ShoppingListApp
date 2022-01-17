@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8c6267d69ec467c9b31d28a990ddf3b7>>
+ * @generated SignedSource<<b6c5aeae8274f9087180873aa7eef575>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -16,6 +16,7 @@ export type EditShoppingListItemInput = {|
   name: string,
   description: string,
   count: number,
+  purchased: boolean,
 |};
 export type ShoppingListItemEditorEditMutation$variables = {|
   input: EditShoppingListItemInput,
@@ -26,6 +27,7 @@ export type ShoppingListItemEditorEditMutation$data = {|
     +name: string,
     +description: string,
     +count: number,
+    +purchased: boolean,
   |},
 |};
 export type ShoppingListItemEditorEditMutationResponse = ShoppingListItemEditorEditMutation$data;
@@ -70,6 +72,13 @@ v4 = {
   "kind": "ScalarField",
   "name": "count",
   "storageKey": null
+},
+v5 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "purchased",
+  "storageKey": null
 };
 return {
   "fragment": {
@@ -88,7 +97,8 @@ return {
         "selections": [
           (v2/*: any*/),
           (v3/*: any*/),
-          (v4/*: any*/)
+          (v4/*: any*/),
+          (v5/*: any*/)
         ],
         "storageKey": null
       }
@@ -113,6 +123,7 @@ return {
           (v2/*: any*/),
           (v3/*: any*/),
           (v4/*: any*/),
+          (v5/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -126,17 +137,17 @@ return {
     ]
   },
   "params": {
-    "cacheID": "eb5d1433a23a1d0d0d138a9037ac1b71",
+    "cacheID": "3143d130c4d2f0bc8a4523736901c81a",
     "id": null,
     "metadata": {},
     "name": "ShoppingListItemEditorEditMutation",
     "operationKind": "mutation",
-    "text": "mutation ShoppingListItemEditorEditMutation(\n  $input: EditShoppingListItemInput!\n) {\n  editShoppingListItem(input: $input) {\n    name\n    description\n    count\n    id\n  }\n}\n"
+    "text": "mutation ShoppingListItemEditorEditMutation(\n  $input: EditShoppingListItemInput!\n) {\n  editShoppingListItem(input: $input) {\n    name\n    description\n    count\n    purchased\n    id\n  }\n}\n"
   }
 };
 })();
 
-(node/*: any*/).hash = "e75c63f1b9695447779bd0e88dc07db7";
+(node/*: any*/).hash = "6ccca22d2f22398b7d32d799067b1212";
 
 module.exports = ((node/*: any*/)/*: Mutation<
   ShoppingListItemEditorEditMutation$variables,

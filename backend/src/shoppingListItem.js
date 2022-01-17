@@ -5,12 +5,13 @@ const {
   GraphQLList,
   GraphQLString,
   GraphQLInt,
+  GraphQLBoolean,
   GraphQLSchema,
   GraphQLID, } = require('graphql');
 
 const { fromGlobalId, globalIdField, nodeInterface, nodeField } = require('./nodeUtils');
 
-const { editItem, createItem } = require('./fakeDatabase');
+const { editItem, createItem, deleteItem } = require('./fakeDatabase');
 
 const shoppingListItemTypeName = 'ShoppingListItem';
 
@@ -19,6 +20,7 @@ const shoppingListItemFields = {
   name: { type: new GraphQLNonNull(GraphQLString) },
   description: { type: new GraphQLNonNull(GraphQLString) },
   count: { type: new GraphQLNonNull(GraphQLInt) },
+  purchased: { type: new GraphQLNonNull(GraphQLBoolean) },
 }
 
 const shoppingListItemType = new GraphQLObjectType({
@@ -57,6 +59,15 @@ const mutations = {
     },
     resolve: (ctx, { input }) => {
       return createItem(shoppingListItemTypeName, input);
+    }
+  },
+  deleteShoppingListItem: {
+    type: new GraphQLNonNull(shoppingListItemType),
+    args: {
+      input: { type: new GraphQLNonNull(GraphQLID) }
+    },
+    resolve: (ctx, { input }) => {
+      return deleteItem(shoppingListItemTypeName, fromGlobalId(input).id);
     }
   },
 }
