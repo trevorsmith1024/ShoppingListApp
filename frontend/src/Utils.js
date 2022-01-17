@@ -22,7 +22,8 @@ export const theme = createTheme({
       disabled: 'rgba(0, 0, 0, 0.12)'
     },
     grey: {
-      [75]: '#7D7A7A'
+      [75]: '#7D7A7A',
+      purchased: 'rgba(213, 223, 233, 0.17)'
     }
   },
   typography: {

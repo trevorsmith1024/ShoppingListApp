@@ -63,7 +63,7 @@ function ShoppingListItem({item}) {
   })
   
   const purchasedStylesContainer = purchased && {
-    backgroundColor: 'grey.100'
+    backgroundColor: 'grey.purchased'
   }
   const purchasedStylesText = purchased && {
     textDecoration: 'line-through'
