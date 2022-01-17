@@ -5,7 +5,7 @@ import type {ShoppingListItem_item$key} from 'ShoppingList_list.graphql';
 import React, { useState, useContext, useCallback } from 'react';
 import {useFragment, useMutation} from 'react-relay';
 
-import { Container, Typography, Box, Button, Checkbox, Modal } from '@mui/material'; import { PrimaryButton, TextButton, IconButton, borderStyles, centeredModalStyle, removeFromClientList } from './Utils';
+import { Typography, Paper, Box, Button, Checkbox, Modal } from '@mui/material'; import { PrimaryButton, TextButton, IconButton, borderStyles, centeredModalStyle, removeFromClientList } from './Utils';
 
 import ShoppingListContext from './ShoppingListContext';
 import { ShoppingListItemEditor } from './ShoppingListItemEditor';
@@ -80,7 +80,7 @@ function ShoppingListItem({item}) {
         </IconButton>
       </Box>
       <Modal open={deleteModalShowing} onClose={closeModal}>
-        <Container sx={{...modalStyle, p: 4}}>
+        <Paper elevation={24} sx={{...modalStyle, p: 4}}>
           <Typography variant='strong1' gutterBottom>
             Delete Item
           </Typography>
@@ -93,7 +93,7 @@ function ShoppingListItem({item}) {
               Delete
             </PrimaryButton>
           </Box>
-        </Container>
+        </Paper>
       </Modal>
     </>
   );

@@ -39,8 +39,13 @@ export const theme = createTheme({
       fontWeight: 600
     }
   },
-  shadows: Array(12).fill('none'),
-
+  components: {
+    MuiAppBar: {
+      defaultProps: {
+        elevation: 0,
+      },
+    },
+  }
 });
 
 export const StyledAppBar = styled(AppBar)(({ theme }) => ({
