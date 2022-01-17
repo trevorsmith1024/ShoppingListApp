@@ -39,10 +39,16 @@ export const theme = createTheme({
       fontWeight: 600
     }
   },
+  props: {
+    MuiButton: {
+      disableElevation: true,
+    },
+  },
   components: {
     MuiAppBar: {
       defaultProps: {
         elevation: 0,
+        disableElevation: true,
       },
     },
   }
@@ -54,7 +60,8 @@ export const StyledAppBar = styled(AppBar)(({ theme }) => ({
 }));
 export const AppBarSpacer = styled('div')(({ theme }) => theme.mixins.toolbar);
 export const PrimaryButton = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.button.main
+  backgroundColor: theme.palette.button.main,
+  boxShadow: 'none'
 }));
 export const TextButton = styled(Button)(({ theme }) => ({
   color: theme.palette.text.primary

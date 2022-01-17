@@ -78,6 +78,7 @@ function ShoppingList(props) {
       false;
 
   return <ShoppingListContext.Provider value={setCurrentlyEditing}>
+    { mainContent }
     { editorForm && (
       <Modal open={true} onClose={editNone}>
         <Box sx={modalStyle}>
@@ -100,7 +101,6 @@ function ShoppingList(props) {
         </Box>
       </Modal>
     )}
-    {mainContent}
   </ShoppingListContext.Provider>
 }
 

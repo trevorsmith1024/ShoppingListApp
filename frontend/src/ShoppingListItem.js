@@ -61,16 +61,23 @@ function ShoppingListItem({item}) {
       onCompleted: closeModal
     })
   })
+  
+  const purchasedStylesContainer = purchased && {
+    backgroundColor: 'grey.100'
+  }
+  const purchasedStylesText = purchased && {
+    textDecoration: 'line-through'
+  };
 
   return (
     <>
-      <Box sx={{ display: 'flex', gap: 2.5, p: 2.5, mt: 2, ...borderStyles }}>
+      <Box sx={{ display: 'flex', gap: 2.5, p: 2.5, mt: 2, ...borderStyles, ...purchasedStylesContainer }}>
         <Checkbox checked={purchased} onChange={handlePurchasedCheckboxChanged}/>
         <Box sx={{ display: 'inline-block', flexGrow: 1 }}>
-          <Typography variant='strong2' sx={{color: 'text.black'}}>
+          <Typography variant='strong2' sx={{color: 'text.black', ...purchasedStylesText}}>
             {name}
           </Typography>
-          <Typography variant='body2' sx={{color: 'grey.75'}}>{description}</Typography>
+          <Typography variant='body2' sx={{color: 'grey.75', ...purchasedStylesText}}>{description}</Typography>
         </Box>
         <IconButton onClick={onClick}>
           <Box className="material-icons-outlined">edit</Box>
