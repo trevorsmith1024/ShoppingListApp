@@ -5,6 +5,9 @@ import type {ShoppingListItem_item$key} from 'ShoppingList_list.graphql';
 import React, { useContext } from 'react';
 import {useFragment} from 'react-relay';
 
+import { Typography, Box, Button, Checkbox } from '@mui/material';
+import { IconButton, borderStyles } from './Utils';
+
 import ShoppingListContext from './ShoppingListContext';
 import { ShoppingListItemEditor } from './ShoppingListItemEditor';
 
@@ -14,7 +17,6 @@ function ShoppingListItem({item}) {
       fragment ShoppingListItem_item on ShoppingListItem {
         name
         description
-        count
         ...ShoppingListItemEditor_item
       }
     `,
@@ -24,17 +26,24 @@ function ShoppingListItem({item}) {
   const setCurrentlyEditing = useContext(ShoppingListContext);
   const onClick = () => setCurrentlyEditing(data);
 
-  const { name, description, count } = data;
+  const { name, description } = data;
 
   return (
-    <>
-      <div>Item: {name}</div>
-      <div>Description: {description}</div>
-      <div>Count: {count}</div>
-      <button onClick={onClick}>
-        Edit
-      </button>
-    </>
+    <Box sx={{ display: 'flex', gap: 2.5, p: 2.5, mt: 2, ...borderStyles }}>
+      <Checkbox/>
+      <Box sx={{ display: 'inline-block', flexGrow: 1 }}>
+        <Typography variant='strong2' sx={{color: 'text.black'}}>
+          {name}
+        </Typography>
+        <Typography variant='body2' sx={{color: 'grey.75'}}>{description}</Typography>
+      </Box>
+      <IconButton onClick={onClick}>
+        <Box className="material-icons-outlined">edit</Box>
+      </IconButton>
+      <IconButton onClick={onClick}>
+        <Box className="material-icons-outlined">delete</Box>
+      </IconButton>
+    </Box>
   );
 }
 

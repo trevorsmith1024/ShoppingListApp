@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
 import { Typography, Box, Button, FormControl, TextField, InputLabel, Select, MenuItem, InputAdornment } from '@mui/material';
+import { PrimaryButton } from './Utils'
 
 export default function ShoppingListItemForm({ initialData, onSubmit, onCancel }) {
   const [formData, setFormData] = useState(initialData || {
@@ -25,10 +26,10 @@ export default function ShoppingListItemForm({ initialData, onSubmit, onCancel }
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 2}}>
       <div>
-        <Typography variant='subtitle1'>
+        <Typography variant='strong1'>
           {operationName} an Item
         </Typography>
-        <Typography variant='subtitle2'>
+        <Typography variant='subtitle1' sx={{color: 'text.secondary'}}>
           {operationName} your {!initialData && 'new'} item below
         </Typography>
       </div>
@@ -69,9 +70,9 @@ export default function ShoppingListItemForm({ initialData, onSubmit, onCancel }
         <Button onClick={onCancel}>
           Cancel
         </Button>
-        <Button disabled={!validInput} variant='contained' onClick={() => onSubmit(formData)}>
+        <PrimaryButton disabled={!validInput} variant='contained' onClick={() => onSubmit(formData)}>
           Send
-        </Button>
+        </PrimaryButton>
       </Box>
     </Box>
   )

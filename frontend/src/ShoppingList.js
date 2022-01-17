@@ -6,9 +6,9 @@ import React, {useState} from 'react';
 import {useFragment} from 'react-relay';
 
 import { Typography, Container, Box, Button, Modal, AppBar, Toolbar } from '@mui/material';
+import { PrimaryButton, IconButton, borderStyles } from './Utils';
 
-import { AppBarSpacer } from './Utils';
-import CancelButton from './CancelButton.svg';
+import { StyledAppBar, AppBarSpacer } from './Utils';
 
 import ShoppingListContext from './ShoppingListContext'
 
@@ -45,24 +45,29 @@ function ShoppingList(props) {
         <Typography>
           Your shopping list is empty :(
         </Typography>
-        <Button style={{ margin: '1rem' }} variant='contained' onClick={editNew}>
+        <PrimaryButton style={{ margin: '1rem' }} variant='contained' onClick={editNew}>
             Add your first item
-        </Button>
+        </PrimaryButton>
         {/* Spacer for flex flow */}
-        <div style={{ height: '1em' }}></div>
+        <div style={{ height: '1rem' }}></div>
       </Box>
     </Box>
     :
-    <Box sx={{ ...borderStyles }} >
-      <h1>ShoppingList</h1>
+    <Box pt={5}>
+      <Box sx={{ display: 'flex' }}>
+        <Typography variant='h5'
+            sx={{ display: 'inline', flexGrow: 1, color: 'text.black' }}>
+          Your Items
+        </Typography>
+        <PrimaryButton variant='contained' onClick={editNew}>
+          Add Item
+        </PrimaryButton>
+      </Box>
       {
         data.shoppingList.map(item =>
           <ShoppingListItem key={item.id} item={item}/>
         )
       }
-      <button onClick={editNew}>
-        New item
-      </button>
     </Box>
 
   const editorForm = 
@@ -76,16 +81,18 @@ function ShoppingList(props) {
     { editorForm && (
       <Modal open={true} onClose={editNone}>
         <Box sx={modalStyle}>
-          <AppBar color='secondary' sx={{borderBottom: '1px solid', borderColor: '#D5DFE9'}}>
+          <StyledAppBar color='secondary' sx={{borderBottom: '1px solid', borderColor: '#D5DFE9'}}>
             <Toolbar>
-              <Typography variant='h6' sx={{ textTransform: 'uppercase', flexGrow: 1 }}>
+              <Typography variant='h6' sx={{ flexGrow: 1 }}>
                 Shopping List
               </Typography>
-              <Button onClick={editNone} sx={{padding: 0, minWidth: 0}}>
-                  <img src={CancelButton}/>
-              </Button>
+              <IconButton onClick={editNone}>
+                <Box className="material-icons" sx={{ color: 'text.primary' }}>
+                  first_page
+                </Box>
+              </IconButton>
             </Toolbar>
-          </AppBar>
+          </StyledAppBar>
           <AppBarSpacer/>
           <Container sx={{height: '100%', p: 4}}>
             {editorForm}
@@ -97,11 +104,6 @@ function ShoppingList(props) {
   </ShoppingListContext.Provider>
 }
 
-const borderStyles = {
-  border: 1,
-  borderColor: 'outline.primary',
-  borderRadius: 1
-}
 
 const flexConfigurationStyles = {
   vertical: {

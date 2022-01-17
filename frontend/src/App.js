@@ -9,10 +9,10 @@ import {
 } from 'react-relay/hooks';
 import RelayEnvironment from './RelayEnvironment';
 
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, Typography, AppBar, Toolbar, Container } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, Typography, Toolbar, Container } from '@mui/material';
 
-import { AppBarSpacer } from './Utils';
+import { StyledAppBar, AppBarSpacer, theme } from './Utils';
 
 import ShoppingList from './ShoppingList';
 
@@ -33,39 +33,18 @@ const preloadedQuery = loadQuery(RelayEnvironment, AppQuery, {
   /* query variables */
 });
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4D81B7',
-    },
-    secondary: {
-      main: '#FAFAFA',
-    },
-    outline: {
-      primary: '#C6C6C6',
-    },
-  },
-  typography: {
-    fontSize: 14,
-    h6: {
-      fontSize: "1.15rem",
-    }
-  },
-  shadows: Array(12).fill('none')
-});
-
 function App(props) {
   const data = usePreloadedQuery(AppQuery, props.preloadedQuery);
 
   return (
     <>
-      <AppBar>
+      <StyledAppBar>
         <Toolbar>
-          <Typography variant='h6' sx={{ textTransform: 'uppercase' }}>
+          <Typography variant='h6'>
             Shopping List
           </Typography>
         </Toolbar>
-      </AppBar>
+      </StyledAppBar>
       <AppBarSpacer/>
       <Container>
         <ShoppingList viewer={data.viewer}/>

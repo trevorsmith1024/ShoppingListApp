@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0952c8cc1828eb69c8c7a3fb4899712b>>
+ * @generated SignedSource<<513e9b2b8caa6f6968dc32ed5f69cb80>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -18,7 +18,6 @@ export type ShoppingListItem_item$ref = ShoppingListItem_item$fragmentType;
 export type ShoppingListItem_item$data = {|
   +name: string,
   +description: string,
-  +count: number,
   +$fragmentSpreads: ShoppingListItemEditor_item$fragmentType,
   +$fragmentType: ShoppingListItem_item$fragmentType,
 |};
@@ -51,13 +50,6 @@ var node/*: ReaderFragment*/ = {
       "storageKey": null
     },
     {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "count",
-      "storageKey": null
-    },
-    {
       "args": null,
       "kind": "FragmentSpread",
       "name": "ShoppingListItemEditor_item"
@@ -67,7 +59,7 @@ var node/*: ReaderFragment*/ = {
   "abstractKey": null
 };
 
-(node/*: any*/).hash = "9f7c307be6a601e4250da77c47e6bfd1";
+(node/*: any*/).hash = "24dcbb670db7f636739fbb4525e7053f";
 
 module.exports = ((node/*: any*/)/*: Fragment<
   ShoppingListItem_item$fragmentType,
