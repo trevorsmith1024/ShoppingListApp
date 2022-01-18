@@ -15,7 +15,6 @@ import { StyledAppBar, AppBarSpacer, Spinner, theme } from './Utils';
 import './App.css';
 import ShoppingList from './ShoppingList';
 
-// Define a query
 const AppQuery = graphql`
   query AppQuery {
     viewer {
@@ -24,11 +23,7 @@ const AppQuery = graphql`
   }
 `;
 
-// Immediately load the query as our app starts. For a real app, we'd move this
-// into our routing configuration, preloading data as we transition to new routes.
-const preloadedQuery = loadQuery(RelayEnvironment, AppQuery, {
-  /* query variables */
-});
+const preloadedQuery = loadQuery(RelayEnvironment, AppQuery, {});
 
 function App(props) {
   const data = usePreloadedQuery(AppQuery, props.preloadedQuery);
