@@ -11,10 +11,10 @@ export default function ShoppingListItemForm({ initialData, onSubmit, onCancel }
   const updateField = (fieldName, value) =>
     setFormData({ ...formData, [fieldName]: value })
 
-  const handleNameChange = useCallback(e => updateField('name', e.target.value), [initialData]);
-  const handleDescChange = useCallback(e => updateField('description', e.target.value), [initialData]);
-  const handleCountChange = useCallback(e => updateField('count', e.target.value), [initialData]);
-  const handlePurchasedChange = useCallback(e => updateField('purchased', e.target.checked), [initialData])
+  const handleNameChange = useCallback(e => updateField('name', e.target.value), [formData]);
+  const handleDescChange = useCallback(e => updateField('description', e.target.value), [formData]);
+  const handleCountChange = useCallback(e => updateField('count', e.target.value), [formData]);
+  const handlePurchasedChange = useCallback(e => updateField('purchased', e.target.checked), [formData])
 
   const validInput = formData.name && formData.description && formData.count;
 
