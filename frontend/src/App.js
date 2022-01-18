@@ -1,5 +1,4 @@
-import React from 'react';
-import './App.css';
+import React, { Suspense } from 'react';
 import graphql from 'babel-plugin-relay/macro';
 import {
   RelayEnvironmentProvider,
@@ -13,9 +12,8 @@ import { CssBaseline, Typography, Toolbar, Container } from '@mui/material';
 
 import { StyledAppBar, AppBarSpacer, Spinner, theme } from './Utils';
 
+import './App.css';
 import ShoppingList from './ShoppingList';
-
-const { Suspense } = React;
 
 // Define a query
 const AppQuery = graphql`
