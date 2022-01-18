@@ -3,8 +3,12 @@ const db = {
   }
 };
 
-const getItem = (type, id) =>
-  ({id, __type: type, ...db[type][id]})
+const wait = () => new Promise(r => setTimeout(r, 1000));
+
+const getItem = async (type, id) => {
+  await wait();
+  return {id, __type: type, ...db[type][id]};
+}
 
 const editItem = (type, id, values) => {
   if (!db[type][id]) {
@@ -21,16 +25,17 @@ const createItem = (type, values) => {
   return getItem(type, id);
 }
 
-const deleteItem = (type, id) => {
+const deleteItem = async (type, id) => {
   if (!db[type][id]) {
     throw new Error(`Object of type ${type} with id ${id} not found`);
   }
-  const item = getItem(type, id);
+  const item = await getItem(type, id);
   delete db[type][id];
   return item;
 }
 
-const getList = (type) => {
+const getList = async (type) => {
+  await wait();
   const listObject = db[type];
   return Object.keys(listObject).map(id =>
     ({ id, __type: type, ...listObject[id] })

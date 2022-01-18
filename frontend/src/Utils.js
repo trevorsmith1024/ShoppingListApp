@@ -1,5 +1,5 @@
 import { styled, createTheme } from '@mui/material/styles';
-import { AppBar, Button } from '@mui/material';
+import { AppBar, Button, CircularProgress } from '@mui/material';
 
 export const theme = createTheme({
   palette: {
@@ -40,18 +40,18 @@ export const theme = createTheme({
       fontWeight: 600
     }
   },
-  props: {
-    MuiButton: {
-      disableElevation: true,
-    },
-  },
   components: {
     MuiAppBar: {
       defaultProps: {
         elevation: 0,
-        disableElevation: true,
       },
     },
+    MuiCircularProgress: {
+      defaultProps: {
+        size: 80,
+        thickness: 1
+      }
+    }
   }
 });
 
@@ -71,6 +71,9 @@ export const IconButton = styled(Button)(({ theme }) => ({
   color: theme.palette.text.primary,
   padding: 0,
   minWidth: 0,
+}));
+export const Spinner = styled(CircularProgress)(({ theme }) => ({
+  display: 'block', margin: '124px auto 0 auto'
 }));
 
 export const borderStyles = {

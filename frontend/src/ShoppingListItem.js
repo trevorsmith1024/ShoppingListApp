@@ -6,6 +6,7 @@ import React, { useState, useContext, useCallback } from 'react';
 import {useFragment, useMutation} from 'react-relay';
 
 import { Typography, Paper, Box, Button, Checkbox, Modal } from '@mui/material'; import { PrimaryButton, TextButton, IconButton, borderStyles, centeredModalStyle, removeFromClientList } from './Utils';
+import { Spinner } from './Utils';
 
 import ShoppingListContext from './ShoppingListContext';
 import { ShoppingListItemEditor } from './ShoppingListItemEditor';
@@ -71,8 +72,11 @@ function ShoppingListItem({item}) {
 
   return (
     <>
-      <Box sx={{ display: 'flex', gap: 2.5, p: 2.5, mt: 2, ...borderStyles, ...purchasedStylesContainer }}>
-        <Checkbox checked={purchased} onChange={handlePurchasedCheckboxChanged}/>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5, p: 2.5, mt: 2, ...borderStyles, ...purchasedStylesContainer }}>
+        { purchaseUpdateIsInFlight ?
+          <Spinner size={42} sx={{m: 0}}/> :
+          <Checkbox checked={purchased} onChange={handlePurchasedCheckboxChanged}/>
+        }
         <Box sx={{ display: 'inline-block', flexGrow: 1 }}>
           <Typography variant='strong2' sx={{color: 'text.black', ...purchasedStylesText}}>
             {name}
@@ -88,15 +92,21 @@ function ShoppingListItem({item}) {
       </Box>
       <Modal open={deleteModalShowing} onClose={closeModal}>
         <Paper elevation={24} sx={{...modalStyle, p: 4}}>
-          <Typography variant='strong1' gutterBottom>
-            Delete Item
-          </Typography>
-          <Typography variant='body2' sx={{color: 'text.secondary', flexGrow: 1}}>
-            Are you sure you want to delete this item? This cannot be undone.
-          </Typography>
-          <Box sx={{display: 'flex', justifyContent: 'flex-end', gap: 2}}>
+          { isInFlight ?
+            <Spinner sx={{ mt: '20px' }}/>
+            :
+            <>
+              <Typography variant='strong1' gutterBottom>
+                Delete Item
+              </Typography>
+              <Typography variant='body2' sx={{color: 'text.secondary'}}>
+                Are you sure you want to delete this item? This cannot be undone.
+              </Typography>
+            </>
+          }
+          <Box sx={{mt: 'auto', display: 'flex', justifyContent: 'flex-end', gap: 2}}>
             <TextButton onClick={closeModal}> Cancel </TextButton>
-            <PrimaryButton variant='contained' onClick={submitDelete}>
+            <PrimaryButton disabled={isInFlight} variant='contained' onClick={submitDelete}>
               Delete
             </PrimaryButton>
           </Box>

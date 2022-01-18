@@ -3,7 +3,7 @@ import graphql from 'babel-plugin-relay/macro';
 import React, { useCallback, useContext } from 'react';
 import {useFragment, useMutation} from 'react-relay';
 
-import { addToClientList } from './Utils';
+import { Spinner, addToClientList } from './Utils';
 
 import ShoppingListContext from './ShoppingListContext';
 import ShoppingListItemForm from './ShoppingListItemForm';
@@ -70,7 +70,7 @@ function ShoppingListItemControl({mutation, updater, initialData}) {
   })
 
   if (isInFlight) {
-    return <div>loading</div>
+    return <Spinner/>
   }
 
   return <ShoppingListItemForm

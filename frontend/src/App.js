@@ -12,7 +12,7 @@ import RelayEnvironment from './RelayEnvironment';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, Typography, Toolbar, Container } from '@mui/material';
 
-import { StyledAppBar, AppBarSpacer, theme } from './Utils';
+import { StyledAppBar, AppBarSpacer, Spinner, theme } from './Utils';
 
 import ShoppingList from './ShoppingList';
 
@@ -35,22 +35,7 @@ const preloadedQuery = loadQuery(RelayEnvironment, AppQuery, {
 
 function App(props) {
   const data = usePreloadedQuery(AppQuery, props.preloadedQuery);
-
-  return (
-    <>
-      <StyledAppBar>
-        <Toolbar>
-          <Typography variant='h6'>
-            Shopping List
-          </Typography>
-        </Toolbar>
-      </StyledAppBar>
-      <AppBarSpacer/>
-      <Container>
-        <ShoppingList viewer={data.viewer}/>
-      </Container>
-    </>
-  );
+  return <ShoppingList viewer={data.viewer}/>;
 }
 
 function AppRoot(props) {
@@ -58,9 +43,19 @@ function AppRoot(props) {
     <ThemeProvider theme={theme}>
       <CssBaseline/>
       <RelayEnvironmentProvider environment={RelayEnvironment}>
-        <Suspense fallback={'Loading...'}>
-          <App preloadedQuery={preloadedQuery} />
-        </Suspense>
+        <StyledAppBar>
+          <Toolbar>
+            <Typography variant='h6'>
+              Shopping List
+            </Typography>
+          </Toolbar>
+        </StyledAppBar>
+        <AppBarSpacer/>
+        <Container>
+          <Suspense fallback={ <Spinner/> }>
+            <App preloadedQuery={preloadedQuery} />
+          </Suspense>
+        </Container>
       </RelayEnvironmentProvider>
     </ThemeProvider>
   );
