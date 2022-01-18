@@ -25,7 +25,9 @@ function ShoppingListItem({item}) {
 
   const [commit, isInFlight] = useMutation(graphql`
     mutation ShoppingListItemDeleteMutation($input: ID!) {
-      deleteShoppingListItem(input: $input) { id }
+      deleteShoppingListItem(input: $input) {
+        id @deleteRecord
+      }
     }
   `)
 
