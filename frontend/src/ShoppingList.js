@@ -37,7 +37,7 @@ function ShoppingList(props) {
 
   const mainContent = !data.shoppingList.length ?
     <Box mt={'110px'}>
-      <Box sx={{ ...borderStyles, ...flexConfigurationStyles.vertical,
+      <Box sx={{ ...borderStyles, ...emptyListFlexStyle,
           height: 290,
           width: 619,
           margin: '0 auto',
@@ -105,13 +105,11 @@ function ShoppingList(props) {
 }
 
 
-const flexConfigurationStyles = {
-  vertical: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
+const emptyListFlexStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center'
 }
 
 const modalStyle = {

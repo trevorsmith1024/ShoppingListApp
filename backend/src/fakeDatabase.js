@@ -3,7 +3,7 @@ const db = {
   }
 };
 
-const wait = () => new Promise(r => setTimeout(r, 1000));
+const wait = () => new Promise(r => setTimeout(r, 600));
 
 const getItem = async (type, id) => {
   await wait();
