@@ -3,8 +3,8 @@ import graphql from 'babel-plugin-relay/macro';
 import React, { useState, useContext, useCallback } from 'react';
 import {useFragment, useMutation} from 'react-relay';
 
-import { Typography, Paper, Box, Checkbox, Modal } from '@mui/material'; import { PrimaryButton, TextButton, IconButton, borderStyles, centeredModalStyle, removeFromClientList } from './Utils';
-import { Spinner } from './Utils';
+import { Typography, Paper, Box, Checkbox, Modal } from '@mui/material';
+import { PrimaryButton, TextButton, IconButton, Spinner, borderStyles, centeredModalStyle, removeFromClientList } from './Utils';
 
 import ShoppingListContext from './ShoppingListContext';
 
