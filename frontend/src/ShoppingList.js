@@ -4,9 +4,7 @@ import React, {useState} from 'react';
 import {useFragment} from 'react-relay';
 
 import { Typography, Container, Box, Modal, Toolbar } from '@mui/material';
-import { PrimaryButton, IconButton, borderStyles, centeredModalStyle } from './Utils';
-
-import { StyledAppBar, AppBarSpacer } from './Utils';
+import { StyledAppBar, AppBarSpacer, PrimaryButton, IconButton, borderStyles, centeredModalStyle } from './Utils';
 
 import ShoppingListContext from './ShoppingListContext'
 
