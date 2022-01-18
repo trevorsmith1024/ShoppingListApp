@@ -1,11 +1,9 @@
 import graphql from 'babel-plugin-relay/macro';
 
-import type {ShoppingList_list$key} from 'ShoppingList_list.graphql';
-
 import React, {useState} from 'react';
 import {useFragment} from 'react-relay';
 
-import { Typography, Container, Box, Button, Modal, AppBar, Toolbar } from '@mui/material';
+import { Typography, Container, Box, Modal, Toolbar } from '@mui/material';
 import { PrimaryButton, IconButton, borderStyles, centeredModalStyle } from './Utils';
 
 import { StyledAppBar, AppBarSpacer } from './Utils';

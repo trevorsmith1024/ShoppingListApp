@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
-import { Typography, Box, Button, FormControl, FormControlLabel, TextField, InputLabel, Select, MenuItem, InputAdornment, Checkbox } from '@mui/material';
+import { Typography, Box, FormControl, FormControlLabel, TextField, InputLabel, Select, MenuItem, InputAdornment, Checkbox } from '@mui/material';
 import { PrimaryButton, TextButton } from './Utils'
 
 export default function ShoppingListItemForm({ initialData, onSubmit, onCancel }) {
@@ -11,10 +11,10 @@ export default function ShoppingListItemForm({ initialData, onSubmit, onCancel }
   const updateField = (fieldName, value) =>
     setFormData({ ...formData, [fieldName]: value })
 
-  const handleNameChange = useCallback(e => updateField('name', e.target.value));
-  const handleDescChange = useCallback(e => updateField('description', e.target.value));
-  const handleCountChange = useCallback(e => updateField('count', e.target.value));
-  const handlePurchasedChange = useCallback(e => updateField('purchased', e.target.checked))
+  const handleNameChange = useCallback(e => updateField('name', e.target.value), [initialData]);
+  const handleDescChange = useCallback(e => updateField('description', e.target.value), [initialData]);
+  const handleCountChange = useCallback(e => updateField('count', e.target.value), [initialData]);
+  const handlePurchasedChange = useCallback(e => updateField('purchased', e.target.checked), [initialData])
 
   const validInput = formData.name && formData.description && formData.count;
 

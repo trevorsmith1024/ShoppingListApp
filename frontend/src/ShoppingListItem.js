@@ -1,15 +1,12 @@
 import graphql from 'babel-plugin-relay/macro';
 
-import type {ShoppingListItem_item$key} from 'ShoppingList_list.graphql';
-
 import React, { useState, useContext, useCallback } from 'react';
 import {useFragment, useMutation} from 'react-relay';
 
-import { Typography, Paper, Box, Button, Checkbox, Modal } from '@mui/material'; import { PrimaryButton, TextButton, IconButton, borderStyles, centeredModalStyle, removeFromClientList } from './Utils';
+import { Typography, Paper, Box, Checkbox, Modal } from '@mui/material'; import { PrimaryButton, TextButton, IconButton, borderStyles, centeredModalStyle, removeFromClientList } from './Utils';
 import { Spinner } from './Utils';
 
 import ShoppingListContext from './ShoppingListContext';
-import { ShoppingListItemEditor } from './ShoppingListItemEditor';
 
 function ShoppingListItem({item}) {
   const data = useFragment(
@@ -44,7 +41,7 @@ function ShoppingListItem({item}) {
   const onClick = () => setCurrentlyEditing(data);
 
   const [deleteModalShowing, setDeleteModalShowing] = useState(false);
-  const openModal = useCallback(() => setDeleteModalShowing(true));
+  const openModal = useCallback(() => setDeleteModalShowing(true), []);
   const closeModal = () => setDeleteModalShowing(false);
 
   const handlePurchasedCheckboxChanged = (e) => {
@@ -61,7 +58,7 @@ function ShoppingListItem({item}) {
       updater: removeFromClientList('deleteShoppingListItem'),
       onCompleted: closeModal
     })
-  })
+  }, [commit, id])
   
   const purchasedStylesContainer = purchased && {
     backgroundColor: 'grey.purchased'

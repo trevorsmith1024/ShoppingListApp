@@ -67,7 +67,7 @@ function ShoppingListItemControl({mutation, updater, initialData}) {
       updater,
       onCompleted
     })
-  })
+  }, [commit, updater])
 
   if (isInFlight) {
     return <Spinner/>
